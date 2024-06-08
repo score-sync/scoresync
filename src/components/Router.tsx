@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AddPanel from './AddPanel';
+import AddPanel from './AddPanel/AddPanel';
 
 enum RoutePath {
   CREATE_LEAGUE = 'create-league',
