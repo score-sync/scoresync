@@ -1,7 +1,7 @@
 import './App.css';
 import { Flex, Layout } from 'antd';
 import { AppHeader } from './components/AppHeader';
-import AddPanel from './components/AddPanel';
+import Router from './components/Router';
 const { Footer, Content } = Layout;
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Layout>
         <AppHeader />
         <Content>
-          <AddPanel></AddPanel>
+          <Router />
         </Content>
         <Footer></Footer>
       </Layout>
