@@ -2,15 +2,26 @@ import { Layout, Menu, Flex, Image } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import Logo from '../../assets/images/logo.png';
 import './AppHeader.css';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '../Router/types';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 export const AppHeader = () => {
+  const navigate = useNavigate();
+
   return (
     <Header style={{ backgroundColor: '#fff', padding: 0 }}>
-      <Flex justify="space-between">
-        <Image src={Logo} className={'logo'} preview={false} style={{ height: '50px; !important' }} />
+      <Flex justify="space-between" className="pl-4 pr-4">
+        <Image
+          src={Logo}
+          className={'logo'}
+          preview={false}
+          onClick={() => {
+            navigate(RoutePath.HOME);
+          }}
+        />
         <Flex>
           <h5>Welcome Sameer</h5>
           <Menu onClick={console.log} selectedKeys={['mail']} mode="horizontal">

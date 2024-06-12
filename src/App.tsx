@@ -1,20 +1,17 @@
 import { Flex, Layout } from 'antd';
-import { AppHeader } from './components/AppHeader/AppHeader';
-import Router from './components/Router';
+import { AppRouter } from './components/Router/AppRouter';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
-const { Footer, Content } = Layout;
+const { Content } = Layout;
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Flex gap="middle" wrap>
         <Layout>
-          <AppHeader />
           <Content>
-            <Router />
+            <AppRouter />
           </Content>
-          <Footer></Footer>
         </Layout>
       </Flex>
     </QueryClientProvider>
