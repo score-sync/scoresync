@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddPanel from '../AddPanel/AddPanel';
 import { WrapComponent } from './WrapComponent';
 import { RoutePath } from './types';
+import LoginPage from '../../pages/Login';
 
 export const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ export const AppRouter = () => {
               </WrapComponent>
             }
           />
+          <Route path={RoutePath.LOGIN} element={<LoginPage></LoginPage>} />
           <Route
             path={RoutePath.CREATE_LEAGUE}
             element={

@@ -8,7 +8,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Flex gap="middle" wrap>
-        <Layout>
+        <Layout style={{ minHeight: '100vh' }}>
           <Content>
             <AppRouter />
           </Content>
