@@ -12,7 +12,7 @@ export const AppHeader = () => {
   const navigate = useNavigate();
 
   return (
-    <Header style={{ backgroundColor: '#fff', padding: 0 }}>
+    <Header style={{ backgroundColor: '#fff', padding: 0, width: '100%' }}>
       <Flex justify="space-between" className="pl-4 pr-4">
         <Image
           src={Logo}

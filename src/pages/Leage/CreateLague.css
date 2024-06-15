@@ -1,0 +1,28 @@
+/* App.css */
+.logo {
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1890ff;
+  margin-left: 20px;
+}
+
+.ant-btn {
+  width: 100%;
+}
+
+.ant-form-item {
+  margin-bottom: 16px;
+}
+
+.ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .ant-btn {
+    margin-bottom: 10px;
+  }
+}

@@ -11,12 +11,18 @@
 //     </Content>
 //   );
 // };
-
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { MailOutlined, LockOutlined, FacebookFilled, AppleFilled, GoogleCircleFilled } from '@ant-design/icons';
+import { BLUE, GREY } from '../../utilities/Constant';
 // import login from './login.less';
 
-const { Title } = Typography;
+import { createFromIconfontCN } from '@ant-design/icons';
+
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
+});
+
+const { Title, Text } = Typography;
 
 const LoginPage = () => {
   const onFinish = () => {
@@ -41,28 +47,30 @@ const LoginPage = () => {
           style={styles.form}
         >
           <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
-            <Input prefix={<MailOutlined />} placeholder="Email" />
+            <Input prefix={<MailOutlined style={{ color: GREY }} />} placeholder="Email" size="large" />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]}>
-            <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+            <Input.Password prefix={<LockOutlined style={{ color: GREY }} />} placeholder="Password" size="large" />
           </Form.Item>
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={styles.loginButton}>
+            <Button type="primary" htmlType="submit" style={styles.loginButton} size="large">
               Sign in
             </Button>
           </Form.Item>
         </Form>
-        <Space style={styles.socialLogin}>
-          <div>Or continue with</div>
-          <Space size="large">
-            <Button shape="circle" icon={<i className="fab fa-facebook-f" />} />
-            <Button shape="circle" icon={<i className="fab fa-apple" />} />
-            <Button shape="circle" icon={<i className="fab fa-google" />} />
-          </Space>
-        </Space>
+        <div style={styles.socialLogin} className="pt-4">
+          <Text color={GREY}>or continue with</Text>
+          <div className="pt-6">
+            <Space size="large">
+              <Button shape="circle" icon={<FacebookFilled />} />
+              <Button shape="circle" icon={<AppleFilled />} />
+              <Button shape="circle" icon={<GoogleCircleFilled />} />
+            </Space>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -74,30 +82,25 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: '#f0f2f5',
   },
   formContainer: {
     padding: '40px',
     background: '#fff',
     borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   },
   title: {
-    textAlign: 'center',
-    marginBottom: '24px',
-    color: '#595959',
+    color: BLUE,
   },
   form: {
     maxWidth: '300px',
   },
   loginButton: {
     width: '100%',
-    background: 'linear-gradient(to right, #6a11cb, #2575fc)',
+    background: 'linear-gradient(to right, #2575fc, #6a11cb)',
     borderColor: 'transparent',
   },
   socialLogin: {
     textAlign: 'center',
-    marginTop: '20px',
   },
 };
 

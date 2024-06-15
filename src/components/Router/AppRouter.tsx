@@ -3,6 +3,7 @@ import AddPanel from '../AddPanel/AddPanel';
 import { WrapComponent } from './WrapComponent';
 import { RoutePath } from './types';
 import LoginPage from '../../pages/Login';
+import CreateLague from '../../pages/Leage/CreateLague';
 
 export const AppRouter = () => {
   return (
@@ -22,7 +23,7 @@ export const AppRouter = () => {
             path={RoutePath.CREATE_LEAGUE}
             element={
               <WrapComponent>
-                <div>CREATE_LEAGUE</div>
+                <CreateLague />
               </WrapComponent>
             }
           />
