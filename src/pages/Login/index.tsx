@@ -1,4 +1,4 @@
-import { Flex } from 'antd';
+import { Flex, Image } from 'antd';
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { MailOutlined, LockOutlined, FacebookFilled, AppleFilled, GoogleCircleFilled } from '@ant-design/icons';
 import { BLUE, GREY } from '../../utilities/Constant';
@@ -9,6 +9,7 @@ import { BLUE, GREY } from '../../utilities/Constant';
 // const IconFont = createFromIconfontCN({
 //   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 // });
+import Logo from '../../assets/images/logo.png';
 
 const { Title, Text } = Typography;
 
@@ -25,7 +26,7 @@ const LoginPage = () => {
     <Flex justify="center" align="center" className="h-full">
       <div>
         <Title level={2} style={{ color: BLUE }}>
-          Welcome
+          <Image src={Logo} className={'cursor-pointer mt-4 logo'} preview={false} />
         </Title>
         <Form name="login" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
           <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
