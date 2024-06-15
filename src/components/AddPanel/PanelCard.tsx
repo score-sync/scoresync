@@ -1,22 +1,25 @@
-import { Card } from 'antd';
+import { Card, Typography, Flex } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { BLUE } from '../../utilities/Constant';
 
+const { Text } = Typography;
 export const PanelCard = ({ navigate, title }: { navigate: () => void; title: string }) => {
   return (
     <Card
       hoverable
-      style={{ textAlign: 'center', border: `2px solid ${BLUE}` }}
+      className="p-12 text-center border-2 border-blue"
       cover={
-        <div style={{ padding: '40px 0', border: `2px 0px 0px 0px solid ${BLUE}`, borderRadius: '10px' }}>
-          <div>
-            <PlusOutlined style={{ fontSize: '40px', color: '#1890ff' }} />
-          </div>
+        <div className="p-6 border-blue border-none border-t-1">
+          <Flex justify="center">
+            <div className="p-4 rounded-full bg-lightBlue">
+              {/* Not taking the tailwind color */}
+              <PlusOutlined className="p-4 text-5xl" style={{ color: '#5D87FF' }} />
+            </div>
+          </Flex>
         </div>
       }
       onClick={navigate}
     >
-      <Card.Meta title={title} />
+      <Card.Meta title={<Text className="text-xs">{title}</Text>} />
     </Card>
   );
 };

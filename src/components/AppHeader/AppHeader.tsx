@@ -4,6 +4,7 @@ import Logo from '../../assets/images/logo.png';
 import './AppHeader.css';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../Router/types';
+import { WHITE } from '../../utilities/Constant';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -12,11 +13,11 @@ export const AppHeader = () => {
   const navigate = useNavigate();
 
   return (
-    <Header style={{ backgroundColor: '#fff', padding: 0, width: '100%' }}>
-      <Flex justify="space-between" className="pl-4 pr-4">
+    <Header className="w-full sticky top-0 p-0 z-10 bg-white">
+      <Flex justify="space-between" className="w-full">
         <Image
           src={Logo}
-          className={'logo'}
+          className={'cursor-pointer h-12 logo'}
           preview={false}
           onClick={() => {
             navigate(RoutePath.HOME);
