@@ -10,7 +10,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Flex justify="center">
-        <Layout className="m-4 min-h-screen min-h-screen md:min-w-[320px] max-w-[1200px]">
+        <Layout className="ml-4 mr-4 min-h-screen min-h-screen md:min-w-[320px] max-w-[1200px]">
           <Content className="bg-white">
             <AppRouter />
           </Content>
