@@ -6,6 +6,7 @@ import LoginPage from '../../pages/Login';
 import CreateLague from '../../pages/Leage/CreateLague';
 import { useData } from '../../DataProvider';
 import { useEffect } from 'react';
+import { PastLeague } from '../../pages/Leage/PastLeague';
 
 export const AppRouter = () => {
   const {
@@ -49,7 +50,7 @@ export const AppRouter = () => {
             path={RoutePath.PAST_LEAGUE}
             element={
               <WrapComponent>
-                <div>PAST_LEAGUE</div>
+                <PastLeague />
               </WrapComponent>
             }
           />
