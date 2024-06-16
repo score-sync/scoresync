@@ -15,7 +15,7 @@ export const AppRouter = () => {
   } = useData();
   console.log(user);
   useEffect(() => {
-    setUser({ email: 'email', name: 'name' });
+    setUser({ email: 'email', name: 'Sameer' });
   }, [setUser]);
   return (
     <BrowserRouter>
