@@ -4,8 +4,18 @@ import { WrapComponent } from './WrapComponent';
 import { RoutePath } from './types';
 import LoginPage from '../../pages/Login';
 import CreateLague from '../../pages/Leage/CreateLague';
+import { useData } from '../../DataProvider';
+import { useEffect } from 'react';
 
 export const AppRouter = () => {
+  const {
+    state: { user },
+    setUser,
+  } = useData();
+  console.log(user);
+  useEffect(() => {
+    setUser({ email: 'email', name: 'name' });
+  }, [setUser]);
   return (
     <BrowserRouter>
       <Routes>
