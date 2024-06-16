@@ -33,6 +33,8 @@ const columns = [
   },
 ];
 
-export const PastLeague = () => {
+const PastLeague = () => {
   return <Table dataSource={dataSource} columns={columns} />;
 };
+
+export default PastLeague;
