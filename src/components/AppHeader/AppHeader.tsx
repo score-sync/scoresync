@@ -47,7 +47,7 @@ export const AppHeader = () => {
       <Flex justify="space-between" className="w-full">
         <Image
           src={Logo}
-          className={'cursor-pointer logo pt-2'}
+          className={'cursor-pointer logo pt-2 mt-1'}
           preview={false}
           onClick={() => {
             navigate(RoutePath.HOME);
