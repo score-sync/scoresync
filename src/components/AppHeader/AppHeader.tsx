@@ -1,4 +1,4 @@
-import { Layout, Flex, Image, Dropdown, MenuProps, Button } from 'antd';
+import { Layout, Flex, Image, Dropdown, MenuProps, Button, Typography } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import Logo from '../../assets/images/logo.png';
 import './AppHeader.css';
@@ -8,7 +8,7 @@ import { useData } from '../../DataProvider';
 
 const { Header } = Layout;
 // const { SubMenu } = Menu;
-
+const { Text } = Typography;
 const items: MenuProps['items'] = [
   {
     key: '1',
@@ -68,7 +68,7 @@ export const AppHeader = () => {
           </Menu>
         </Flex> */}
         <Flex>
-          <h5 className="pr-2">Welcome {user?.name || 'Sameer'}</h5>
+          <Text className="pr-2 mt-5 text-md">Welcome {user?.name || 'Sameer'}</Text>
           <Dropdown menu={{ items }} placement="bottomRight" className="mt-4">
             <Button>
               <MenuOutlined className="text-5xl" style={{ fontSize: '18px' }} />
