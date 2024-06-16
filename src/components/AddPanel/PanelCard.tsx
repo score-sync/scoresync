@@ -6,13 +6,13 @@ export const PanelCard = ({ navigate, title }: { navigate: () => void; title: st
   return (
     <Card
       hoverable
-      className="p-12 text-center border-2 border-blue"
+      className="p-2 md:p-12 text-center border-2 border-blue"
       cover={
-        <div className="p-6 border-blue border-none border-t-1">
+        <div className="p-4 md:p-6 border-blue border-none border-t-1">
           <Flex justify="center">
-            <div className="p-4 rounded-full bg-lightBlue">
+            <div className="p-0 md:p-4 rounded-full bg-lightBlue">
               {/* Not taking the tailwind color */}
-              <PlusOutlined className="p-4 text-5xl" style={{ color: '#5D87FF' }} />
+              <PlusOutlined className="p-2 md:p-4 text-5xl" style={{ color: '#5D87FF' }} />
             </div>
           </Flex>
         </div>
