@@ -11,6 +11,7 @@ const LoginPage = lazy(() => import('../../pages/Login'));
 const App = lazy(() => import('../AddPanel/Test'));
 const PastLeague = lazy(() => import('../../pages/Leage/PastLeague'));
 const CreateLague = lazy(() => import('../../pages/Leage/CreateLague'));
+const UpcomingLeague = lazy(() => import('../../pages/Leage/UpcomingLeague'));
 
 const withWrapper = (Component: LazyExoticComponent<() => ReactNode>, needWrapper = true) => {
   return needWrapper ? (
@@ -41,7 +42,7 @@ export const AppRouter = () => {
           <Route index element={withWrapper(AddPanel)} />
           <Route path={RoutePath.LOGIN} element={withWrapper(LoginPage, false)} />
           <Route path={RoutePath.CREATE_LEAGUE} element={withWrapper(CreateLague)} />
-          <Route path={RoutePath.UPCOMING_LEAGUE} element={withWrapper(CreateLague)} />
+          <Route path={RoutePath.UPCOMING_LEAGUE} element={withWrapper(UpcomingLeague)} />
           <Route path={RoutePath.PAST_LEAGUE} element={withWrapper(PastLeague)} />
           <Route path={RoutePath.TEST} element={withWrapper(App)} />
           <Route path="*" element={<div>404</div>} />

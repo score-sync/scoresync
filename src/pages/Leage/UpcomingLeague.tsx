@@ -1,7 +1,7 @@
 import { LeagueTable } from '../../common/Table';
 
-const PastLeague = () => {
+const UpcomingLeague = () => {
   return <LeagueTable />;
 };
 
-export default PastLeague;
+export default UpcomingLeague;

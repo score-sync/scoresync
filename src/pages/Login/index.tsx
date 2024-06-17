@@ -1,7 +1,7 @@
 import { Flex, Image } from 'antd';
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { MailOutlined, LockOutlined, FacebookFilled, AppleFilled, GoogleCircleFilled } from '@ant-design/icons';
-import { BLUE, GREY } from '../../utilities/Constant';
+import { GREY } from '../../utilities/Constant';
 // import login from './login.less';
 
 // import { createFromIconfontCN } from '@ant-design/icons';
@@ -10,10 +10,14 @@ import { BLUE, GREY } from '../../utilities/Constant';
 //   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 // });
 import Logo from '../../assets/images/logo.png';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '../../components/Router/types';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const onFinish = () => {
     console.log('Success:');
   };
@@ -25,9 +29,11 @@ const LoginPage = () => {
   return (
     <Flex justify="center" align="center" className="h-full">
       <div>
-        <Title level={2} style={{ color: BLUE }}>
-          <Image src={Logo} className={'cursor-pointer mt-4 logo'} preview={false} />
-        </Title>
+        <Image src={Logo} className={'cursor-pointer mt-4 mb-4 logo'} preview={false} />
+
+        {/* <Title level={2} style={{ color: BLUE }}>
+          Welcome
+        </Title> */}
         <Form name="login" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
           <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
             <Input prefix={<MailOutlined style={{ color: GREY }} />} placeholder="Email" size="large" />
@@ -45,6 +51,9 @@ const LoginPage = () => {
               style={{ background: 'linear-gradient(to right, #2575fc, #6a11cb)' }}
               size="large"
               className="w-full"
+              onClick={() => {
+                navigate(RoutePath.HOME);
+              }}
             >
               Sign in
             </Button>
