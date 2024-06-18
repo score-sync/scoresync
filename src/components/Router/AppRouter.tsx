@@ -44,9 +44,19 @@ export const AppRouter = () => {
           <Route index element={withWrapper(AddPanel)} />
           <Route path={RoutePath.LOGIN} element={withWrapper(LoginPage, false)} />
           <Route path={RoutePath.LEAGUE}>
+            <Route path={RoutePath.LEAGUE_ID} element={withWrapper(CreateLague)} />
             <Route path={RoutePath.CREATE} element={withWrapper(CreateLague)} />
             <Route path={RoutePath.UPCOMING} element={withWrapper(UpcomingLeague)} />
             <Route path={RoutePath.PAST} element={withWrapper(PastLeague)} />
+            <Route path="*" element={<Navigate to="/not-found" />} />
+          </Route>
+          <Route path={RoutePath.FIGHTER}>
+            <Route path={RoutePath.CREATE} element={withWrapper(CreateLague)} />
+            <Route path={RoutePath.FIGHTER_ID} element={withWrapper(CreateLague)} />
+            <Route path="*" element={<Navigate to="/not-found" />} />
+          </Route>
+          <Route path={RoutePath.REFREE}>
+            <Route path={RoutePath.CREATE} element={withWrapper(CreateLague)} />
             <Route path="*" element={<Navigate to="/not-found" />} />
           </Route>
           <Route path={RoutePath.TEST} element={withWrapper(App)} />

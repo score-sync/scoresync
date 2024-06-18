@@ -1,7 +1,7 @@
 import { LeagueTable } from '../../common/Table';
 
 const UpcomingLeague = () => {
-  return <LeagueTable />;
+  return <LeagueTable title="Upcoming Leagues" />;
 };
 
 export default UpcomingLeague;

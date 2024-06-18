@@ -1,6 +1,6 @@
 import { Row, Col, Flex } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { RoutePath } from '../Router/types';
+import { AppRoutes } from '../Router/types';
 import { PanelCard } from './PanelCard';
 
 const AddPanel = () => {
@@ -10,19 +10,19 @@ const AddPanel = () => {
     {
       title: 'Create League',
       navigate: () => {
-        navigate(RoutePath.LEAGUE);
+        navigate(AppRoutes.CREATE_LEAGUE);
       },
     },
     {
       title: 'Upcoming League',
       navigate: () => {
-        navigate(RoutePath.UPCOMING_LEAGUE);
+        navigate(AppRoutes.UPCOMING_LEAGUE);
       },
     },
     {
       title: 'Past League',
       navigate: () => {
-        navigate(RoutePath.PAST_LEAGUE);
+        navigate(AppRoutes.PAST_LEAGUE);
       },
     },
   ];

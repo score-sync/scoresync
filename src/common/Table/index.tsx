@@ -35,15 +35,10 @@ const columns = [
   },
 ];
 
-export const LeagueTable = () => {
+export const LeagueTable = ({ title }: { title: string }) => {
   return (
     <>
-      <PageHeader
-        className="border-2 mb-16 mt-10"
-        style={{ border: `1px solid ${BLUE}` }}
-        title="Create League"
-        subTitle=""
-      />
+      <PageHeader className="border-2 mb-16 mt-10" style={{ border: `1px solid ${BLUE}` }} title={title} subTitle="" />
       <Table dataSource={dataSource} columns={columns} />
     </>
   );

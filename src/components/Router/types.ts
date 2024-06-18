@@ -1,14 +1,20 @@
 export enum RoutePath {
   HOME = '/',
-  CREATE_LEAGUE = 'create-league',
-  UPCOMING_LEAGUE = 'upcoming-league',
-  PAST_LEAGUE = 'past-league',
+
   LOGIN = 'login',
   TEST = 'test',
+
   LEAGUE = 'league',
+  LEAGUE_ID = ':leagueId',
   CREATE = 'create',
   UPCOMING = 'upcoming',
   PAST = 'past',
+
+  FIGHTER = 'fighter',
+  FIGHTER_ID = ':figherId',
+
+  REFREE = 'refree',
+  REFREE_ID = ':refreeId',
 
   LEAGUE_HOME = '/league/:leagueId',
   LEAGUE_ADD_FIGHTER = '/league/:leagueId/fighter/add',
@@ -17,4 +23,10 @@ export enum RoutePath {
   LEAGUE_BOUTS = '/league/:leagueId/bouts',
   LEAGUE_FIGHTER_HOME = '/league/:leagueId/fighter/:fighterId',
   FIGHTER_HOME = '/fighter/:fighterId',
+}
+
+export enum AppRoutes {
+  CREATE_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.CREATE}`,
+  UPCOMING_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.UPCOMING}`,
+  PAST_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.PAST}`,
 }
