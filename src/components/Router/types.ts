@@ -5,6 +5,11 @@ export enum RoutePath {
   PAST_LEAGUE = 'past-league',
   LOGIN = 'login',
   TEST = 'test',
+  LEAGUE = 'league',
+  CREATE = 'create',
+  UPCOMING = 'upcoming',
+  PAST = 'past',
+
   LEAGUE_HOME = '/league/:leagueId',
   LEAGUE_ADD_FIGHTER = '/league/:leagueId/fighter/add',
   LEAGUE_ADD_REFREE = '/league/:leagueId/ref/add',

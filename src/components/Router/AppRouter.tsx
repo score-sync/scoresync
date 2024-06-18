@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { WrapComponent } from './WrapComponent';
 import { RoutePath } from './types';
 import { useData } from '../../DataProvider';
@@ -26,6 +26,8 @@ const withWrapper = (Component: LazyExoticComponent<() => ReactNode>, needWrappe
     </Suspense>
   );
 };
+
+const NotFound = () => <div>404</div>;
 export const AppRouter = () => {
   const {
     state: { user },
@@ -38,14 +40,17 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
+        <Route path={RoutePath.HOME}>
           <Route index element={withWrapper(AddPanel)} />
           <Route path={RoutePath.LOGIN} element={withWrapper(LoginPage, false)} />
-          <Route path={RoutePath.CREATE_LEAGUE} element={withWrapper(CreateLague)} />
-          <Route path={RoutePath.UPCOMING_LEAGUE} element={withWrapper(UpcomingLeague)} />
-          <Route path={RoutePath.PAST_LEAGUE} element={withWrapper(PastLeague)} />
+          <Route path={RoutePath.LEAGUE}>
+            <Route path={RoutePath.CREATE} element={withWrapper(CreateLague)} />
+            <Route path={RoutePath.UPCOMING} element={withWrapper(UpcomingLeague)} />
+            <Route path={RoutePath.PAST} element={withWrapper(PastLeague)} />
+            <Route path="*" element={<Navigate to="/not-found" />} />
+          </Route>
           <Route path={RoutePath.TEST} element={withWrapper(App)} />
-          <Route path="*" element={<div>404</div>} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
