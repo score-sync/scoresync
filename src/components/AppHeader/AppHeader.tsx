@@ -3,7 +3,7 @@ import { MenuOutlined } from '@ant-design/icons';
 import Logo from '../../assets/images/logo.png';
 import './AppHeader.css';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes, RoutePath } from '../Router/types';
+import { AppRoutes } from '../Router/types';
 import { useData } from '../../DataProvider';
 
 const { Header } = Layout;

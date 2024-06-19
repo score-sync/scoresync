@@ -22,4 +22,5 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   return <DataContext.Provider value={{ state, setUser }}>{children}</DataContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useData = () => useContext(DataContext);
