@@ -1,6 +1,7 @@
 import { PageHeader } from '@ant-design/pro-layout';
-import { Table } from 'antd';
+import { Popconfirm, Table } from 'antd';
 import { BLUE } from '../../utilities/Constant';
+import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
 
 const dataSource = [
   {
@@ -32,6 +33,32 @@ const columns = [
     title: 'Address',
     dataIndex: 'address',
     key: 'address',
+  },
+  {
+    title: 'Edit',
+    dataIndex: 'edit',
+    key: 'edit',
+    render: () => <EditTwoTone onClick={() => {}} />,
+    width: '5%',
+  },
+  {
+    title: 'Delete',
+    dataIndex: 'delete',
+    key: 'delete',
+    width: '5%',
+    render: () => (
+      <Popconfirm
+        title="Delete the task"
+        description="Are you sure to delete this task?"
+        onConfirm={() => {}}
+        onCancel={() => {}}
+        okText="Yes"
+        cancelText="No"
+      >
+        {/* <Button danger>Delete</Button> */}
+        <DeleteTwoTone />
+      </Popconfirm>
+    ),
   },
 ];
 
