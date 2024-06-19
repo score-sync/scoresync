@@ -3,7 +3,7 @@ import { MenuOutlined } from '@ant-design/icons';
 import Logo from '../../assets/images/logo.png';
 import './AppHeader.css';
 import { useNavigate } from 'react-router-dom';
-import { RoutePath } from '../Router/types';
+import { AppRoutes, RoutePath } from '../Router/types';
 import { useData } from '../../DataProvider';
 
 const { Header } = Layout;
@@ -50,7 +50,7 @@ export const AppHeader = () => {
           className={'cursor-pointer logo pt-2 mt-1'}
           preview={false}
           onClick={() => {
-            navigate(RoutePath.HOME);
+            navigate(AppRoutes.LAGUE_HOME);
           }}
         />
         {/* <Flex>
@@ -68,7 +68,7 @@ export const AppHeader = () => {
           </Menu>
         </Flex> */}
         <Flex>
-          <Text className="pr-2 mt-5 text-md">Welcome {user?.name || 'Sameer'}</Text>
+          <Text className="max-sm:hidden pr-2 mt-5 text-md ">Welcome {user?.name || 'Sameer'}</Text>
           <Dropdown menu={{ items }} placement="bottomRight" className="mt-4">
             <Button>
               <MenuOutlined className="text-5xl" style={{ fontSize: '18px' }} />

@@ -41,9 +41,10 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.HOME}>
-          <Route index element={withWrapper(AddPanel)} />
+          <Route index element={withWrapper(LoginPage, false)} />
           <Route path={RoutePath.LOGIN} element={withWrapper(LoginPage, false)} />
           <Route path={RoutePath.LEAGUE}>
+            <Route index element={withWrapper(AddPanel)} />
             <Route path={RoutePath.LEAGUE_ID} element={withWrapper(CreateLague)} />
             <Route path={RoutePath.CREATE} element={withWrapper(CreateLague)} />
             <Route path={RoutePath.UPCOMING} element={withWrapper(UpcomingLeague)} />

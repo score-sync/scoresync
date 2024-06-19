@@ -26,6 +26,7 @@ export enum RoutePath {
 }
 
 export enum AppRoutes {
+  LAGUE_HOME = `/${RoutePath.LEAGUE}`,
   CREATE_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.CREATE}`,
   UPCOMING_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.UPCOMING}`,
   PAST_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.PAST}`,

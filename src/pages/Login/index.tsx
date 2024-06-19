@@ -11,7 +11,7 @@ import { GREY } from '../../utilities/Constant';
 // });
 import Logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { RoutePath } from '../../components/Router/types';
+import { AppRoutes } from '../../components/Router/types';
 
 const { Text } = Typography;
 
@@ -34,11 +34,11 @@ const LoginPage = () => {
         {/* <Title level={2} style={{ color: BLUE }}>
           Welcome
         </Title> */}
-        <Form name="login" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-          <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
+        <Form name="login" initialValues={{ remember: false }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+          <Form.Item name="email" rules={[{ required: false, message: 'Please input your Email!' }]}>
             <Input prefix={<MailOutlined style={{ color: GREY }} />} placeholder="Email" size="large" />
           </Form.Item>
-          <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]}>
+          <Form.Item name="password" rules={[{ required: false, message: 'Please input your Password!' }]}>
             <Input.Password prefix={<LockOutlined style={{ color: GREY }} />} placeholder="Password" size="large" />
           </Form.Item>
           <Form.Item name="remember" valuePropName="checked">
@@ -52,7 +52,7 @@ const LoginPage = () => {
               size="large"
               className="w-full"
               onClick={() => {
-                navigate(RoutePath.HOME);
+                navigate(AppRoutes.LAGUE_HOME);
               }}
             >
               Sign in
