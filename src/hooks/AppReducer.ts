@@ -10,7 +10,7 @@ export enum ActionType {
 
 interface setUser {
   type: ActionType.USER_UPDATE;
-  payload: User;
+  payload?: User;
 }
 
 type Action = setUser;

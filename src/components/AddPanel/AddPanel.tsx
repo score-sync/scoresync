@@ -31,7 +31,7 @@ const AddPanel = () => {
       <Flex className="h-full items-center" justify="space-around">
         <Row justify="space-around" align="middle" gutter={16} className="w-full">
           {Panels.map(({ title, navigate }) => (
-            <Col xs={24} sm={24} md={6} className="pb-4">
+            <Col key={title} xs={24} sm={24} md={6} className="pb-4">
               <PanelCard title={title} navigate={navigate} />
             </Col>
           ))}

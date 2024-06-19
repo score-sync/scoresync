@@ -12,10 +12,12 @@ import { GREY } from '../../utilities/Constant';
 import Logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
+import { useData } from '../../DataProvider';
 
 const { Text } = Typography;
 
 const LoginPage = () => {
+  const { setUser } = useData();
   const navigate = useNavigate();
 
   const onFinish = () => {
@@ -52,6 +54,7 @@ const LoginPage = () => {
               size="large"
               className="w-full"
               onClick={() => {
+                setUser({ name: 'Sameer', email: 'email' });
                 navigate(AppRoutes.LAGUE_HOME);
               }}
             >

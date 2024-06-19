@@ -8,6 +8,7 @@ export type Data = {
     token?: string;
   };
   setUser: (user: User) => void;
+  resetUser: () => void;
 };
 
 export const DataContext = createContext({} as Data);
@@ -17,9 +18,9 @@ interface Props {
 }
 
 export const DataProvider: React.FC<Props> = ({ children }) => {
-  const { state, setUser } = useAppState();
+  const { state, setUser, resetUser } = useAppState();
 
-  return <DataContext.Provider value={{ state, setUser }}>{children}</DataContext.Provider>;
+  return <DataContext.Provider value={{ state, setUser, resetUser }}>{children}</DataContext.Provider>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

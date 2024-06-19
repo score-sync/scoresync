@@ -3,7 +3,7 @@ import { ActionType, AppReducer } from './AppReducer';
 import { User } from '../types/User';
 
 export const useAppState = () => {
-  const initialState = {};
+  const initialState = { user: { name: 'Sameer', email: 'email' } };
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const setUser = useCallback((user: User) => {
     dispatch({
@@ -12,8 +12,16 @@ export const useAppState = () => {
     });
   }, []);
 
+  const resetUser = useCallback(() => {
+    dispatch({
+      type: ActionType.USER_UPDATE,
+      payload: undefined,
+    });
+  }, []);
+
   return {
     state,
     setUser,
+    resetUser,
   };
 };
