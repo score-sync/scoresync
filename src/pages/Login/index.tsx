@@ -1,3 +1,4 @@
+// <reference path="../node_modules/reactjs-social-login/dist/index.d.ts" />
 import { Flex, Image } from 'antd';
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { MailOutlined, LockOutlined, FacebookFilled, AppleFilled, GoogleCircleFilled } from '@ant-design/icons';
@@ -13,7 +14,9 @@ import Logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
 import { useData } from '../../DataProvider';
+import { LoginSocialGoogle } from 'reactjs-social-login';
 
+import { useCallback } from 'react';
 const { Text } = Typography;
 
 const LoginPage = () => {
@@ -28,6 +31,12 @@ const LoginPage = () => {
     console.log('Failed:');
   };
 
+  const onLoginStart = useCallback(() => {
+    // alert('login start');
+  }, []);
+
+  const REDIRECT_URI = 'http://localhost:5173/signin';
+  const GOOGLE_APP_ID = '413722017629-jeqehdvvsjj03ooto842f5ju58sdupk8.apps.googleusercontent.com';
   return (
     <Flex justify="center" align="center" className="h-full">
       <div>
@@ -69,7 +78,26 @@ const LoginPage = () => {
           <Space size="large">
             <Button shape="circle" icon={<FacebookFilled />} />
             <Button shape="circle" icon={<AppleFilled />} />
-            <Button shape="circle" icon={<GoogleCircleFilled />} />
+            <LoginSocialGoogle
+              // client_id={import.meta.env?.env?.REACT_APP_GG_APP_ID || ''}
+              client_id={GOOGLE_APP_ID}
+              onLoginStart={onLoginStart}
+              redirect_uri={REDIRECT_URI}
+              scope="email"
+              discoveryDocs="claims_supported"
+              access_type="offline"
+              onResolve={({ provider, data }: { provider: string; data: string }) => {
+                console.log(data);
+                console.log(provider);
+                // setProvider(provider);
+                // setProfile(data);
+              }}
+              onReject={(err: string) => {
+                console.log(err);
+              }}
+            >
+              <Button shape="circle" icon={<GoogleCircleFilled />} />
+            </LoginSocialGoogle>
           </Space>
         </Flex>
       </div>

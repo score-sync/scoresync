@@ -9,12 +9,14 @@ const dataSource = [
     name: 'Mike',
     age: 32,
     address: '10 Downing Street',
+    edit: 1,
   },
   {
     key: '2',
     name: 'John',
     age: 42,
     address: '10 Downing Street',
+    edit: 2,
   },
 ];
 
@@ -38,7 +40,13 @@ const columns = [
     title: 'Edit',
     dataIndex: 'edit',
     key: 'edit',
-    render: () => <EditTwoTone onClick={() => {}} />,
+    render: (id: string) => (
+      <EditTwoTone
+        onClick={() => {
+          window.location.href = id;
+        }}
+      />
+    ),
     width: '5%',
   },
   {
