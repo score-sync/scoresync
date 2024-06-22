@@ -20,6 +20,8 @@ const Fighter = lazy(() => import('../../pages/Fighter/Fighter'));
 const BoutCreate = lazy(() => import('../../pages/Bouts/Create'));
 const RefreeCreate = lazy(() => import('../../pages/Refree/Create'));
 
+const Bouts = lazy(() => import('../../pages/Bouts'));
+
 const WithWrapper = (Component: LazyExoticComponent<() => ReactNode>) => {
   const user = useValidateUser();
 
@@ -69,7 +71,7 @@ export const AppRouter = () => {
               </Route>
               {/* Add Bouts inside league */}
               <Route path={RoutePath.BOUT}>
-                <Route index element={WithWrapper(BoutCreate)} />
+                <Route index element={WithWrapper(Bouts)} />
                 <Route path={RoutePath.CREATE} element={WithWrapper(BoutCreate)} />
               </Route>
             </Route>

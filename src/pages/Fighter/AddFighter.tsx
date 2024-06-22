@@ -1,101 +1,90 @@
-import 'antd/dist/reset.css';
-import { Form, Input, DatePicker, Select, Button, Upload, Row, Col } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Input, Button, Upload, DatePicker, Form, Flex, Select } from 'antd';
+// import { PageHeader } from '@ant-design/pro-layout';
 
-const { Option } = Select;
+import { UploadOutlined } from '@ant-design/icons';
+import { PageHeader } from '@ant-design/pro-layout';
+import { useNavigate } from 'react-router-dom';
 
 const AddFighter = () => {
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-5xl">
-        <div className="text-center mb-6">
-          <img src="https://via.placeholder.com/150" alt="UFC Logo" className="mx-auto" />
-          <h1 className="text-2xl font-bold">UFC League</h1>
-        </div>
-        <Form layout="vertical">
-          <Row gutter={[16, 16]}>
-            <Col span={12}>
-              <Form.Item name="fighterName" label="Fighter Name">
-                <Input />
+    <>
+      <PageHeader className="border-0 mb-16 mt-10 pl-0 border-b border-grey" title="Create Fighter" subTitle="" />
+
+      <div className="flex flex-col items-center justify-center mt-8">
+        <div className="rounded-lg w-full">
+          <Form form={form} layout="vertical" name="form-name" initialValues={{}} onFinish={() => {}}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <Form.Item name="fighterName" label="Fighter Name" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Name" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
               <Form.Item name="dob" label="Date of Birth">
-                <DatePicker className="w-full" />
+                <DatePicker size="large" className="border-blue" placeholder="Date" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="height" label="Height">
-                <Input />
+              <Form.Item name="height" label="Height" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="5'7" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="weight" label="Weight">
-                <Input />
+              <Form.Item name="weight" label="Weight" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="60" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="professionalAmateur" label="Professional/ Amateur">
-                <Select>
-                  <Option value="professional">Professional</Option>
-                  <Option value="amateur">Amateur</Option>
+              <Form.Item name="weight" label="Weight" className="md:mr-16">
+                <Select onChange={() => {}} size="large">
+                  <Select.Option value="professional">Professional</Select.Option>
+                  <Select.Option value="amateur">Amateur</Select.Option>
                 </Select>
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="fighterContactNo" label="Fighter Contact No.">
-                <Input />
+              <Form.Item name="contactNo" label="Contact No" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Contact No" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="amateurRecord" label="Amateur Record">
-                <Input defaultValue="2-0-0 (WIN-LOSS-DRAW)" />
+              <Form.Item name="amateurRecord" label="Amateur Record" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Amateur Record" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="proRecord" label="Pro Record">
-                <Input defaultValue="2-0-0 (WIN-LOSS-DRAW)" />
+              <Form.Item name="proRecord" label="Pro Record" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Pro Record" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="coachName" label="Coach Name">
-                <Input />
+              <Form.Item name="coachName" label="Coach Name" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Name" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="coachContactNo" label="Coach Contact No.">
-                <Input />
+              <Form.Item name="coachPhone" label="Coach Contact No" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Contact No" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="associationGymTeam" label="Association / Gym / Team">
-                <Input />
+              <Form.Item name="association" label="Association/Gym/Team" className="md:mr-16">
+                <Input size="large" className="border-blue" placeholder="Association/Gym/Team" />
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="uploadFighterImage" label="Upload Fighter Image">
+              <Form.Item name="uploadLogo" label="Upload Fighter Logo">
                 <Upload>
-                  <Button icon={<UploadOutlined />}>Upload</Button>
+                  <Button icon={<UploadOutlined />} size="large">
+                    Upload
+                  </Button>
                 </Upload>
               </Form.Item>
-            </Col>
-          </Row>
-          <div className="flex justify-between mt-6">
-            <Button
-              onClick={() => {
-                history.back();
-              }}
-            >
-              Back
-            </Button>
-            <Button type="primary" htmlType="submit">
-              Save
-            </Button>
-            {/* <Button>Next</Button> */}
-          </div>
-        </Form>
+            </div>
+            <Flex justify="space-between" className="mt-6">
+              <Button
+                size="large"
+                onClick={() => {
+                  history.back();
+                }}
+              >
+                Back
+              </Button>
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                onClick={() => {
+                  navigate('/league/1234/fighter/1234');
+                }}
+              >
+                Save
+              </Button>
+            </Flex>
+          </Form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
