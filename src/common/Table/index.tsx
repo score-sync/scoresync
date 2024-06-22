@@ -6,34 +6,41 @@ const dataSource = [
   {
     key: '1',
     name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
+    date: 'Date',
+    pramoterName: 'Mike',
+    location: '10 Downing Street',
     edit: 1,
   },
   {
     key: '2',
+    date: 'Date',
     name: 'John',
-    age: 42,
-    address: '10 Downing Street',
+    pramoterName: 32,
+    location: '10 Downing Street',
     edit: 2,
   },
 ];
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
+  },
+  {
+    title: 'League Name',
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Pramoter Name',
+    dataIndex: 'pramoterName',
+    key: 'pramoterName',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'Location',
+    dataIndex: 'location',
+    key: 'location',
   },
   {
     title: 'Edit',
@@ -69,11 +76,28 @@ const columns = [
   },
 ];
 
-export const LeagueTable = ({ title }: { title: string }) => {
+export const LeagueTable = ({
+  title,
+  rowSelect,
+}: {
+  title: string;
+  rowSelect?: (record: unknown, rowIndex?: number) => void;
+}) => {
   return (
     <>
       <PageHeader className="border-0 mb-16 mt-10 pl-0 border-b border-grey" title={title} subTitle="" />
-      <Table dataSource={dataSource} columns={columns} />
+      <Table
+        onRow={(record, rowIndex) => {
+          if (!rowSelect) {
+            return {};
+          }
+          return {
+            onClick: () => rowSelect(record, rowIndex),
+          };
+        }}
+        dataSource={dataSource}
+        columns={columns}
+      />
     </>
   );
 };
