@@ -6,12 +6,16 @@ import { LazyExoticComponent, ReactNode } from 'react';
 import { Suspense, lazy } from 'react';
 import { useValidateUser } from '../../hooks/use-validate-user';
 
-const AddPanel = lazy(() => import('../AddPanel/AddPanel'));
+const CreateLanding = lazy(() => import('../../pages/Leage/CreateLanding'));
 const LoginPage = lazy(() => import('../../pages/Login'));
 const App = lazy(() => import('../AddPanel/Test'));
 const PastLeague = lazy(() => import('../../pages/Leage/PastLeague'));
 const CreateLague = lazy(() => import('../../pages/Leage/CreateLague'));
 const UpcomingLeague = lazy(() => import('../../pages/Leage/UpcomingLeague'));
+const CreateLagueParts = lazy(() => import('../../pages/Leage/CreateLeagueParts'));
+
+const AddFighter = lazy(() => import('../../pages/Fighter/AddFighter'));
+const Fighter = lazy(() => import('../../pages/Fighter/Fighter'));
 
 const WithWrapper = (Component: LazyExoticComponent<() => ReactNode>) => {
   const user = useValidateUser();
@@ -45,22 +49,40 @@ export const AppRouter = () => {
             }
           />
           <Route path={RoutePath.LEAGUE}>
-            <Route index element={WithWrapper(AddPanel)} />
-            <Route path={RoutePath.LEAGUE_ID} element={WithWrapper(CreateLague)} />
+            <Route index element={WithWrapper(CreateLanding)} />
+            <Route path={RoutePath.LEAGUE_ID}>
+              <Route index element={WithWrapper(CreateLagueParts)} />
+              {/* Add fighters inside league */}
+              <Route path={RoutePath.FIGHTER}>
+                <Route index element={WithWrapper(AddFighter)} />
+                <Route path={RoutePath.CREATE} element={WithWrapper(AddFighter)} />
+                <Route path={RoutePath.FIGHTER_ID} element={WithWrapper(Fighter)} />
+                {/* <Route path="*" element={<Navigate to="/not-found" />} /> */}
+              </Route>
+              {/* Add Refrees inside league */}
+              <Route path={RoutePath.REFREE}>
+                <Route index element={WithWrapper(AddFighter)} />
+                <Route path={RoutePath.CREATE} element={WithWrapper(AddFighter)} />
+              </Route>
+              {/* Add Bouts inside league */}
+              <Route path={RoutePath.BOUT}>
+                <Route index element={WithWrapper(AddFighter)} />
+                <Route path={RoutePath.CREATE} element={WithWrapper(AddFighter)} />
+              </Route>
+            </Route>
             <Route path={RoutePath.CREATE} element={WithWrapper(CreateLague)} />
             <Route path={RoutePath.UPCOMING} element={WithWrapper(UpcomingLeague)} />
             <Route path={RoutePath.PAST} element={WithWrapper(PastLeague)} />
-            <Route path="*" element={<Navigate to="/not-found" />} />
           </Route>
+
           <Route path={RoutePath.FIGHTER}>
-            <Route path={RoutePath.CREATE} element={WithWrapper(CreateLague)} />
-            <Route path={RoutePath.FIGHTER_ID} element={WithWrapper(CreateLague)} />
-            <Route path="*" element={<Navigate to="/not-found" />} />
+            <Route path={RoutePath.FIGHTER_ID} element={WithWrapper(Fighter)} />
           </Route>
+
           <Route path={RoutePath.REFREE}>
-            <Route path={RoutePath.CREATE} element={WithWrapper(CreateLague)} />
-            <Route path="*" element={<Navigate to="/not-found" />} />
+            <Route path={RoutePath.REFREE_ID} element={WithWrapper(CreateLague)} />
           </Route>
+
           <Route path={RoutePath.TEST} element={WithWrapper(App)} />
           <Route path="*" element={<NotFound />} />
         </Route>

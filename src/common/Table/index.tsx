@@ -1,6 +1,5 @@
 import { PageHeader } from '@ant-design/pro-layout';
 import { Popconfirm, Table } from 'antd';
-import { BLUE } from '../../utilities/Constant';
 import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
 
 const dataSource = [
@@ -73,7 +72,7 @@ const columns = [
 export const LeagueTable = ({ title }: { title: string }) => {
   return (
     <>
-      <PageHeader className="border-2 mb-16 mt-10" style={{ border: `1px solid ${BLUE}` }} title={title} subTitle="" />
+      <PageHeader className="border-0 mb-16 mt-10 pl-0 border-b border-grey" title={title} subTitle="" />
       <Table dataSource={dataSource} columns={columns} />
     </>
   );

@@ -1,36 +1,16 @@
 import { Row, Col, Flex } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../Router/types';
 import { PanelCard } from './PanelCard';
 
-const AddPanel = () => {
-  const navigate = useNavigate();
-  const hasBar = true;
-  const Panels = [
-    {
-      title: 'Create League',
-      navigate: () => {
-        navigate(AppRoutes.CREATE_LEAGUE);
-      },
-    },
-    {
-      title: 'Upcoming League',
-      navigate: () => {
-        navigate(AppRoutes.UPCOMING_LEAGUE);
-      },
-    },
-    {
-      title: 'Past League',
-      navigate: () => {
-        navigate(AppRoutes.PAST_LEAGUE);
-      },
-    },
-  ];
+interface AddPanelProps {
+  hasBar?: boolean;
+  cards: { title: string; navigate: () => void }[];
+}
+export const AddPanel = ({ hasBar, cards }: AddPanelProps) => {
   return (
     <>
       <Flex className="h-full items-center" justify="space-around">
         <Row justify="space-around" align="middle" gutter={16} className="w-full">
-          {Panels.map(({ title, navigate }) => (
+          {cards.map(({ title, navigate }) => (
             <Col key={title} xs={24} sm={24} md={6} className="pb-4">
               <PanelCard title={title} navigate={navigate} />
             </Col>
@@ -41,5 +21,3 @@ const AddPanel = () => {
     </>
   );
 };
-
-export default AddPanel;

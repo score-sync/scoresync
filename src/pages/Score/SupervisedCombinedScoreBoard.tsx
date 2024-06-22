@@ -199,7 +199,13 @@ const App = () => {
             </Col>
           </Row>
           <div className="flex justify-between mt-6">
-            <Button>Back</Button>
+            <Button
+              onClick={() => {
+                history.back();
+              }}
+            >
+              Back
+            </Button>
             <Button type="primary" htmlType="submit">
               Save
             </Button>

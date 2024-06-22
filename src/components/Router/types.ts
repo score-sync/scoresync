@@ -16,6 +16,9 @@ export enum RoutePath {
   REFREE = 'refree',
   REFREE_ID = ':refreeId',
 
+  BOUT = 'bout',
+  BOUT_ID = ':boutId',
+
   LEAGUE_HOME = '/league/:leagueId',
   LEAGUE_ADD_FIGHTER = '/league/:leagueId/fighter/add',
   LEAGUE_ADD_REFREE = '/league/:leagueId/ref/add',

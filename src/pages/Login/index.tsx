@@ -17,6 +17,7 @@ import { useData } from '../../DataProvider';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
 import { useCallback } from 'react';
+import { User } from '../../types/User';
 const { Text } = Typography;
 
 const LoginPage = () => {
@@ -85,12 +86,16 @@ const LoginPage = () => {
               redirect_uri={REDIRECT_URI}
               scope="email"
               discoveryDocs="claims_supported"
-              access_type="offline"
-              onResolve={({ provider, data }: { provider: string; data: string }) => {
-                console.log(data);
-                console.log(provider);
-                // setProvider(provider);
-                // setProfile(data);
+              onResolve={({
+                provider,
+                data,
+              }: {
+                provider: string;
+                data: Pick<User, 'name' | 'email'> & { profilePhoto: string };
+              }) => {
+                const { name, email, profilePhoto } = data;
+                setUser({ name, email, photo: profilePhoto, provider });
+                navigate(AppRoutes.LAGUE_HOME);
               }}
               onReject={(err: string) => {
                 console.log(err);
