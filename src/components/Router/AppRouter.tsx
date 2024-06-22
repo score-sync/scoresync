@@ -17,6 +17,9 @@ const CreateLagueParts = lazy(() => import('../../pages/Leage/CreateLeagueParts'
 const AddFighter = lazy(() => import('../../pages/Fighter/AddFighter'));
 const Fighter = lazy(() => import('../../pages/Fighter/Fighter'));
 
+const BoutCreate = lazy(() => import('../../pages/Bouts/Create'));
+const RefreeCreate = lazy(() => import('../../pages/Refree/Create'));
+
 const WithWrapper = (Component: LazyExoticComponent<() => ReactNode>) => {
   const user = useValidateUser();
 
@@ -61,13 +64,13 @@ export const AppRouter = () => {
               </Route>
               {/* Add Refrees inside league */}
               <Route path={RoutePath.REFREE}>
-                <Route index element={WithWrapper(AddFighter)} />
-                <Route path={RoutePath.CREATE} element={WithWrapper(AddFighter)} />
+                <Route index element={WithWrapper(RefreeCreate)} />
+                <Route path={RoutePath.CREATE} element={WithWrapper(RefreeCreate)} />
               </Route>
               {/* Add Bouts inside league */}
               <Route path={RoutePath.BOUT}>
-                <Route index element={WithWrapper(AddFighter)} />
-                <Route path={RoutePath.CREATE} element={WithWrapper(AddFighter)} />
+                <Route index element={WithWrapper(BoutCreate)} />
+                <Route path={RoutePath.CREATE} element={WithWrapper(BoutCreate)} />
               </Route>
             </Route>
             <Route path={RoutePath.CREATE} element={WithWrapper(CreateLague)} />

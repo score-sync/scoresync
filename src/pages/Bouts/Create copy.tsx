@@ -3,7 +3,7 @@ import { Input, Select, Typography, Button } from 'antd';
 const { Title } = Typography;
 const { Option } = Select;
 
-const App = () => {
+const Create = () => {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
@@ -99,7 +99,13 @@ const App = () => {
       </div>
 
       <div className="text-center space-x-4 mt-4">
-        <Button>Back</Button>
+        <Button
+          onClick={() => {
+            history.back();
+          }}
+        >
+          Back
+        </Button>
         <Button type="primary" className="bg-gradient-to-r from-blue-600 to-indigo-600">
           Edit Bout
         </Button>
@@ -115,4 +121,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Create;

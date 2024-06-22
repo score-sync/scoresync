@@ -12,7 +12,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <DataProvider>
         <Flex justify="center">
-          <Layout className="ml-4 mr-4 mb-6 min-h-screen min-h-screen md:min-w-[320px] max-w-[1200px]">
+          <Layout className="ml-4 mr-4 mb-6 min-h-screen md:min-w-[320px] max-w-[1200px]">
             <Content className="bg-white">
               <AppRouter />
             </Content>
