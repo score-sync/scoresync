@@ -44,7 +44,7 @@ export const AppHeader = () => {
     },
   ];
   return (
-    <Header className="w-full sticky top-0 p-0 z-10 bg-white">
+    <Header className="w-full sticky top-0 p-0 pt-4 z-10 bg-white">
       <Flex justify="space-between" className="w-full">
         <Image
           src={Logo}

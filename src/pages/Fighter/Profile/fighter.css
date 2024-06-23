@@ -1,0 +1,24 @@
+.statistic-item:nth-child(odd) {
+  padding-right: 0px !important;
+}
+
+.statistic-item:nth-child(even) {
+  padding-left: 0px !important;
+}
+
+.statistic-item .ant-statistic-content {
+  background-color: #ECF2FF;
+}
+
+.statistic-item.odd .ant-statistic-content {
+  background-color: #E8E8E8;
+}
+
+.statistic-item:nth-child(odd) .ant-statistic-content {
+  border-radius: 10px 0 0 10px;
+  padding: 5px
+}
+.statistic-item:nth-child(even) .ant-statistic-content {
+  border-radius: 0 10px 10px 0;
+  padding: 5px
+}
