@@ -10,6 +10,8 @@ import {
   BLUE100,
   BLUE200,
   BLACK100,
+  NEON,
+  NEON100,
 } from './src/utilities/Constant';
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -26,6 +28,8 @@ export default {
       black100: BLACK100,
       red: RED,
       red100: RED100,
+      neon: NEON,
+      neon100: NEON100,
     },
   },
   plugins: [],

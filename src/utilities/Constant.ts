@@ -11,3 +11,6 @@ export const RED = '#E33E3E';
 export const RED100 = '#FFECF1';
 
 export const BLACK100 = '#161630';
+
+export const NEON = '#36D000';
+export const NEON100 = '#D3FFC3';
