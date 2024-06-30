@@ -18,40 +18,53 @@ const AddFighter = () => {
           <Form form={form} layout="vertical" name="form-name" initialValues={{}} onFinish={() => {}}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <Form.Item name="fighterName" label="Fighter Name" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Name" />
+                <Input size="large" placeholder="Name" />
               </Form.Item>
               <Form.Item name="dob" label="Date of Birth">
-                <DatePicker size="large" className="border-blue" placeholder="Date" />
+                <DatePicker size="large" placeholder="Date" />
               </Form.Item>
               <Form.Item name="height" label="Height" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="5'7" />
+                <Input size="large" placeholder="5'7" />
               </Form.Item>
               <Form.Item name="weight" label="Weight" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="60" />
+                <Input size="large" placeholder="60" />
               </Form.Item>
-              <Form.Item name="weight" label="Weight" className="md:mr-16">
+              <Form.Item name="country" label="Country" className="md:mr-16">
+                <Select onChange={() => {}} size="large">
+                  <Select.Option value="india">India</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item name="state" label="State" className="md:mr-16">
+                <Select onChange={() => {}} size="large">
+                  <Select.Option value="state">state</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item name="weight" label="Professional/Amateur" className="md:mr-16">
                 <Select onChange={() => {}} size="large">
                   <Select.Option value="professional">Professional</Select.Option>
                   <Select.Option value="amateur">Amateur</Select.Option>
                 </Select>
               </Form.Item>
               <Form.Item name="contactNo" label="Contact No" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Contact No" />
+                <Input size="large" placeholder="Contact No" />
               </Form.Item>
               <Form.Item name="amateurRecord" label="Amateur Record" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Amateur Record" />
+                <Input size="large" placeholder="Amateur Record" />
               </Form.Item>
               <Form.Item name="proRecord" label="Pro Record" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Pro Record" />
+                <Input size="large" placeholder="Pro Record" />
               </Form.Item>
               <Form.Item name="coachName" label="Coach Name" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Name" />
+                <Input size="large" placeholder="Name" />
               </Form.Item>
               <Form.Item name="coachPhone" label="Coach Contact No" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Contact No" />
+                <Input size="large" placeholder="Contact No" />
               </Form.Item>
               <Form.Item name="association" label="Association/Gym/Team" className="md:mr-16">
-                <Input size="large" className="border-blue" placeholder="Association/Gym/Team" />
+                <Input size="large" placeholder="Association/Gym/Team" />
+              </Form.Item>
+              <Form.Item name="aadhar" label="Aadhar No" className="md:mr-16">
+                <Input size="large" placeholder="Aadhar" />
               </Form.Item>
               <Form.Item name="uploadLogo" label="Upload Fighter Logo">
                 <Upload>

@@ -8,6 +8,7 @@ import { useValidateUser } from '../../hooks/use-validate-user';
 
 const CreateLanding = lazy(() => import('../../pages/Leage/CreateLanding'));
 const LoginPage = lazy(() => import('../../pages/Login'));
+const LoginResetPage = lazy(() => import('../../pages/Login/Reset'));
 const App = lazy(() => import('../AddPanel/Test'));
 const PastLeague = lazy(() => import('../../pages/Leage/PastLeague'));
 const CreateLague = lazy(() => import('../../pages/Leage/CreateLague'));
@@ -45,14 +46,24 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.HOME}>
-          <Route
-            path={RoutePath.LOGIN}
-            element={
-              <Suspense fallback={<div></div>}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
+          <Route path={RoutePath.LOGIN}>
+            <Route
+              index
+              element={
+                <Suspense fallback={<div></div>}>
+                  <LoginPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={RoutePath.RESET}
+              element={
+                <Suspense fallback={<div></div>}>
+                  <LoginResetPage />
+                </Suspense>
+              }
+            />
+          </Route>
           <Route path={RoutePath.LEAGUE}>
             <Route index element={WithWrapper(CreateLanding)} />
             <Route path={RoutePath.LEAGUE_ID}>

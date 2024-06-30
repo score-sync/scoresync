@@ -2,7 +2,7 @@
 import { Flex, Image } from 'antd';
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { MailOutlined, LockOutlined, FacebookFilled, AppleFilled, GoogleCircleFilled } from '@ant-design/icons';
-import { GREY } from '../../utilities/Constant';
+import { BLACK100, GREY } from '../../utilities/Constant';
 // import login from './login.less';
 
 // import { createFromIconfontCN } from '@ant-design/icons';
@@ -40,7 +40,7 @@ const LoginPage = () => {
   const GOOGLE_APP_ID = '413722017629-jeqehdvvsjj03ooto842f5ju58sdupk8.apps.googleusercontent.com';
   return (
     <Flex justify="center" align="center" className="h-full">
-      <div>
+      <div className="w-1/4">
         <Image src={Logo} className={'cursor-pointer mt-4 mb-4 logo'} preview={false} />
 
         {/* <Title level={2} style={{ color: BLUE }}>
@@ -62,7 +62,7 @@ const LoginPage = () => {
               htmlType="submit"
               style={{ background: 'linear-gradient(to right, #2575fc, #6a11cb)' }}
               size="large"
-              className="w-full"
+              className="w-full border-none"
               onClick={() => {
                 setUser({ name: 'Sameer', email: 'email' });
                 navigate(AppRoutes.LAGUE_HOME);
@@ -72,8 +72,8 @@ const LoginPage = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Flex justify="center" className="pt-4">
-          <Text style={{ color: GREY }}>or continue with</Text>
+        <Flex justify="center" className="pt-2">
+          <Text style={{ color: BLACK100 }}>or continue with</Text>
         </Flex>
         <Flex className="pt-6" justify="center">
           <Space size="large">
@@ -94,6 +94,7 @@ const LoginPage = () => {
                 data: Pick<User, 'name' | 'email'> & { profilePhoto: string };
               }) => {
                 const { name, email, profilePhoto } = data;
+                console.log(data);
                 setUser({ name, email, photo: profilePhoto, provider });
                 navigate(AppRoutes.LAGUE_HOME);
               }}

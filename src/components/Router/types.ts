@@ -2,6 +2,7 @@ export enum RoutePath {
   HOME = '/',
 
   LOGIN = 'login',
+  RESET = 'reset',
   TEST = 'test',
 
   LEAGUE = 'league',
