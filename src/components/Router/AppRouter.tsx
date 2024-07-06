@@ -46,6 +46,7 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.HOME}>
+          <Route index element={<Navigate replace to={RoutePath.LOGIN} />} />
           <Route path={RoutePath.LOGIN}>
             <Route
               index
