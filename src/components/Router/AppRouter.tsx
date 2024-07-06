@@ -45,8 +45,9 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path={''} element={<Navigate to={RoutePath.HOME} />} />
         <Route path={RoutePath.HOME}>
-          <Route index element={<Navigate replace to={RoutePath.LOGIN} />} />
+          <Route index element={<Navigate to={RoutePath.LEAGUE} />} />
           <Route path={RoutePath.LOGIN}>
             <Route
               index
