@@ -1,3 +1,4 @@
+export const API_ENDPOINT = import.meta.env.VITE_API_URL;
 export const BLUE = '#5D87FF';
 export const BLUE100 = '#ECF2FF';
 export const BLUE200 = '#523FD9';

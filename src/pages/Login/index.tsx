@@ -17,7 +17,7 @@ import { useData } from '../../DataProvider';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
 import { useCallback } from 'react';
-import { User } from '../../types/User';
+import { User, UserLevel } from '../../types/User';
 const { Text } = Typography;
 
 const LoginPage = () => {
@@ -64,7 +64,7 @@ const LoginPage = () => {
               size="large"
               className="w-full border-none"
               onClick={() => {
-                setUser({ name: 'Sameer', email: 'email' });
+                setUser({ name: 'Sameer', email: 'email', level: UserLevel.Admin });
                 navigate(AppRoutes.LAGUE_HOME);
               }}
             >
@@ -95,7 +95,7 @@ const LoginPage = () => {
               }) => {
                 const { name, email, profilePhoto } = data;
                 console.log(data);
-                setUser({ name, email, photo: profilePhoto, provider });
+                setUser({ name, email, photo: profilePhoto, provider, level: UserLevel.Admin });
                 navigate(AppRoutes.LAGUE_HOME);
               }}
               onReject={(err: string) => {

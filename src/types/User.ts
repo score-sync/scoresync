@@ -1,4 +1,4 @@
-enum UserLevel {
+export enum UserLevel {
   Admin = 'admin',
   LeagueOwner = 'owner',
   Judge = 'judge',
@@ -8,5 +8,6 @@ export interface User {
   email: string;
   photo?: string;
   provider?: string;
-  level?: UserLevel;
+  level: UserLevel;
+  token?: string;
 }

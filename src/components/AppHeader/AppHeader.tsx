@@ -5,6 +5,7 @@ import './AppHeader.css';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../Router/types';
 import { useData } from '../../DataProvider';
+import { UserLevel } from '../../types/User';
 
 const { Header } = Layout;
 // const { SubMenu } = Menu;
@@ -19,37 +20,40 @@ export const AppHeader = () => {
 
   const items: MenuProps['items'] = [
     {
-      key: '1',
-      label: 'Send Invite',
-      onClick: () => {
-        navigate(AppRoutes.INVITATION);
-      },
-    },
-    {
       key: '2',
-      label: 'Logout',
+      label: <Text className="p-6">Logout</Text>,
       onClick: () => {
         resetUser();
         navigate(AppRoutes.LOGIN);
       },
     },
-    {
-      key: '3',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item
-        </a>
-      ),
-    },
-    {
-      key: '4',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          3rd menu item
-        </a>
-      ),
-    },
+    // {
+    //   key: '3',
+    //   label: (
+    //     <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+    //       2nd menu item
+    //     </a>
+    //   ),
+    // },
+    // {
+    //   key: '4',
+    //   label: (
+    //     <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+    //       3rd menu item
+    //     </a>
+    //   ),
+    // },
   ];
+
+  if (user?.level === UserLevel.Admin) {
+    items.unshift({
+      key: '1',
+      label: <Text className="p-6">Send Invite</Text>,
+      onClick: () => {
+        navigate(AppRoutes.INVITATION);
+      },
+    });
+  }
   return (
     <Header className="w-full sticky top-0 p-0 pt-4 z-10 bg-white">
       <Flex justify="space-between" className="w-full">
@@ -77,7 +81,7 @@ export const AppHeader = () => {
         </Flex> */}
         <Flex>
           <Text className="max-sm:hidden pr-2 mt-5 text-md font-medium">Welcome {user?.name || 'Sameer'}</Text>
-          <Dropdown menu={{ items }} placement="bottomRight" className="mt-4">
+          <Dropdown menu={{ items }} placement="bottomRight" className="mt-4" arrow>
             <Button>
               <MenuOutlined className="text-5xl" style={{ fontSize: '18px' }} />
             </Button>

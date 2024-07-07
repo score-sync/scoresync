@@ -1,9 +1,9 @@
 import { useCallback, useReducer } from 'react';
 import { ActionType, AppReducer } from './AppReducer';
-import { User } from '../types/User';
+import { User, UserLevel } from '../types/User';
 
 export const useAppState = () => {
-  const initialState = { user: { name: 'Sameer', email: 'email' } };
+  const initialState = { user: { name: 'Sameer', email: 'email', level: UserLevel.Admin } };
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const setUser = useCallback((user: User) => {
     dispatch({
