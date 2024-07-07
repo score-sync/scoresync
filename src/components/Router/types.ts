@@ -27,10 +27,13 @@ export enum RoutePath {
   LEAGUE_BOUTS = '/league/:leagueId/bouts',
   LEAGUE_FIGHTER_HOME = '/league/:leagueId/fighter/:fighterId',
   FIGHTER_HOME = '/fighter/:fighterId',
+
+  INVITATION = 'invitation',
 }
 
 export enum AppRoutes {
   LOGIN = `/${RoutePath.LOGIN}`,
+  INVITATION = `/${RoutePath.LOGIN}/${RoutePath.INVITATION}`,
   LAGUE_HOME = `/${RoutePath.LEAGUE}`,
   CREATE_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.CREATE}`,
   UPCOMING_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.UPCOMING}`,

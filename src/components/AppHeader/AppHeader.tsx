@@ -20,6 +20,13 @@ export const AppHeader = () => {
   const items: MenuProps['items'] = [
     {
       key: '1',
+      label: 'Send Invite',
+      onClick: () => {
+        navigate(AppRoutes.INVITATION);
+      },
+    },
+    {
+      key: '2',
       label: 'Logout',
       onClick: () => {
         resetUser();
@@ -27,7 +34,7 @@ export const AppHeader = () => {
       },
     },
     {
-      key: '2',
+      key: '3',
       label: (
         <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
           2nd menu item
@@ -35,7 +42,7 @@ export const AppHeader = () => {
       ),
     },
     {
-      key: '3',
+      key: '4',
       label: (
         <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
           3rd menu item

@@ -5,12 +5,13 @@ import { BLACK100, GREY } from '../../utilities/Constant';
 import Logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
+import { useGetURLQueryParams } from '../../hooks/utils/use-get-url-query-param';
 
 const { Text, Title } = Typography;
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  const token = useGetURLQueryParams('token');
   const onFinish = () => {
     console.log('Success:');
   };
@@ -19,13 +20,14 @@ const LoginPage = () => {
     console.log('Failed:');
   };
 
+  const title = token ? 'Set Password' : 'Reset Password';
   return (
     <Flex justify="center" align="center" className="h-full">
       <div className="w-1/3">
         <Image src={Logo} className={'cursor-pointer mt-4 mb-2 logo'} preview={false} />
 
         <Title level={1} style={{ color: BLACK100 }}>
-          Reset your passsword
+          {title}
         </Title>
         <div className="pb-4">
           <Text>
@@ -71,13 +73,15 @@ const LoginPage = () => {
                 navigate(AppRoutes.LOGIN);
               }}
             >
-              Reset Password
+              {title}
             </Button>
           </Form.Item>
         </Form>
-        <Text className="">
-          Know your password <a href="../login">Log In</a>
-        </Text>
+        {!token && (
+          <Text>
+            Know your password <a href="../login">Log In</a>
+          </Text>
+        )}
       </div>
     </Flex>
   );
