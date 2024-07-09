@@ -1,5 +1,5 @@
 // <reference path="../node_modules/reactjs-social-login/dist/index.d.ts" />
-import { Flex, Image } from 'antd';
+import { Flex, Image, Spin, notification } from 'antd';
 import { Form, Input, Button, Checkbox, Typography, Space } from 'antd';
 import { MailOutlined, LockOutlined, FacebookFilled, AppleFilled, GoogleCircleFilled } from '@ant-design/icons';
 import { BLACK100, GREY } from '../../utilities/Constant';
@@ -16,20 +16,33 @@ import { AppRoutes } from '../../components/Router/types';
 import { useData } from '../../DataProvider';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { User, UserLevel } from '../../types/User';
 const { Text } = Typography;
 
 const LoginPage = () => {
+  const [isSubmitted, setSubmit] = useState(false);
+  const [form] = Form.useForm();
+
   const { setUser } = useData();
   const navigate = useNavigate();
 
-  const onFinish = () => {
-    console.log('Success:');
+  const onFinish = async (values: { [key in string]: string }) => {
+    setSubmit(true);
+    console.log(values);
+    await new Promise((r) => setTimeout(r, 5000));
+    notification.open({
+      message: 'Welcome User',
+    });
+    setUser({ name: 'Sameer', email: 'email', level: UserLevel.Admin });
+    navigate(AppRoutes.LAGUE_HOME);
   };
 
   const onFinishFailed = () => {
-    console.log('Failed:');
+    notification.error({
+      message: 'Error',
+      description: `Sign In Failed!`,
+    });
   };
 
   const onLoginStart = useCallback(() => {
@@ -46,30 +59,58 @@ const LoginPage = () => {
         {/* <Title level={2} style={{ color: BLUE }}>
           Welcome
         </Title> */}
-        <Form name="login" initialValues={{ remember: false }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-          <Form.Item name="email" rules={[{ required: false, message: 'Please input your Email!' }]}>
-            <Input prefix={<MailOutlined style={{ color: GREY }} />} placeholder="Email" size="large" />
+        <Form
+          form={form}
+          name="login"
+          initialValues={{ email: '', password: '' }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your email!' }]}>
+            <Input
+              prefix={<MailOutlined style={{ color: GREY }} />}
+              placeholder="Email"
+              size="large"
+              disabled={isSubmitted}
+            />
           </Form.Item>
-          <Form.Item name="password" rules={[{ required: false, message: 'Please input your Password!' }]}>
-            <Input.Password prefix={<LockOutlined style={{ color: GREY }} />} placeholder="Password" size="large" />
+          <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+            <Input.Password
+              prefix={<LockOutlined style={{ color: GREY }} />}
+              placeholder="Password"
+              size="large"
+              disabled={isSubmitted}
+            />
           </Form.Item>
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ background: 'linear-gradient(to right, #2575fc, #6a11cb)' }}
-              size="large"
-              className="w-full border-none"
-              onClick={() => {
-                setUser({ name: 'Sameer', email: 'email', level: UserLevel.Admin });
-                navigate(AppRoutes.LAGUE_HOME);
-              }}
-            >
-              Sign in
-            </Button>
+          <Form.Item shouldUpdate>
+            {() => (
+              <>
+                {/* <Button
+                  htmlType="reset"
+                  size="large"
+                  className="mr-2"
+                  disabled={form.getFieldValue('email').length === 0 || isSubmitted}
+                  onClick={() => {
+                    form.setFieldValue('email', '');
+                  }}
+                >
+                  Reset
+                </Button> */}
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ background: 'linear-gradient(to right, #2575fc, #6a11cb)' }}
+                  size="large"
+                  className="w-full border-none"
+                  disabled={isSubmitted || !!form.getFieldsError().filter(({ errors }) => errors.length).length}
+                >
+                  Sign in {isSubmitted && <Spin />}
+                </Button>
+              </>
+            )}
           </Form.Item>
         </Form>
         <Flex justify="center" className="pt-2">

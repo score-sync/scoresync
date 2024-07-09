@@ -1,4 +1,4 @@
-import { Flex, Image } from 'antd';
+import { Flex, Image, Spin } from 'antd';
 import { Form, Input, Button, Typography } from 'antd';
 import { InfoCircleOutlined, LockOutlined } from '@ant-design/icons';
 import { BLACK100, GREY } from '../../utilities/Constant';
@@ -6,21 +6,36 @@ import Logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
 import { useGetURLQueryParams } from '../../hooks/utils/use-get-url-query-param';
+import { notification } from 'antd';
+import { useState } from 'react';
 
 const { Text, Title } = Typography;
 
 const LoginPage = () => {
+  const [form] = Form.useForm();
+  const [isSubmitted, setSubmit] = useState(false);
   const navigate = useNavigate();
   const token = useGetURLQueryParams('token');
-  const onFinish = () => {
-    console.log('Success:');
+  const onFinish = async (values: { [key in string]: string }) => {
+    setSubmit(true);
+    console.log(values['password']);
+    await new Promise((r) => setTimeout(r, 5000));
+    notification.open({
+      message: 'Password Set',
+      description: `Try to sign in with new password.`,
+    });
+    navigate(AppRoutes.LOGIN);
   };
 
   const onFinishFailed = () => {
-    console.log('Failed:');
+    notification.error({
+      message: 'Error',
+      description: `Failed resetting password!`,
+    });
   };
 
   const title = token ? 'Set Password' : 'Reset Password';
+
   return (
     <Flex justify="center" align="center" className="h-full">
       <div className="w-1/3">
@@ -34,17 +49,43 @@ const LoginPage = () => {
             Enter a new password to reset the password on your account. We’ll ask for this password whenever you log in.
           </Text>
         </div>
-        <Form name="login" initialValues={{ remember: false }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-          <Form.Item name="password" rules={[{ required: false, message: 'Please input your Password!' }]}>
-            <Input.Password prefix={<LockOutlined style={{ color: GREY }} />} placeholder="New Password" size="large" />
+        <Form
+          form={form}
+          name="reset"
+          initialValues={{ password: '', confirmPassword: '' }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+              },
+              () => ({
+                validator(_, value) {
+                  if (value && value.length >= 8) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Must be at least 8 characters long'));
+                },
+              }),
+            ]}
+          >
+            <Input.Password
+              prefix={<LockOutlined style={{ color: GREY }} />}
+              placeholder="New Password"
+              size="large"
+              disabled={isSubmitted}
+            />
           </Form.Item>
           <ul className="mb-4">
             <li>
               <Text>
-                <InfoCircleOutlined /> Must be at least 10 characters long
+                <InfoCircleOutlined /> Must be at least 8 characters long
               </Text>
             </li>
-            <li>
+            {/* <li>
               <Text>
                 <InfoCircleOutlined /> Must be at least 10 characters long
               </Text>
@@ -53,28 +94,61 @@ const LoginPage = () => {
               <Text>
                 <InfoCircleOutlined /> Must be at least 10 characters long
               </Text>
-            </li>
+            </li> */}
           </ul>
-          <Form.Item name="confirmPassword" rules={[{ required: false, message: 'Please input your Password!' }]}>
+          <Form.Item
+            name="confirmPassword"
+            rules={[
+              {
+                required: true,
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('The new password that you entered do not match!'));
+                },
+              }),
+            ]}
+          >
             <Input.Password
               prefix={<LockOutlined style={{ color: GREY }} />}
               placeholder="Confirm new password"
               size="large"
+              disabled={isSubmitted}
             />
           </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ background: 'linear-gradient(to right, #2575fc, #6a11cb)' }}
-              size="large"
-              className="w-30 border-none"
-              onClick={() => {
-                navigate(AppRoutes.LOGIN);
-              }}
-            >
-              {title}
-            </Button>
+          <Form.Item shouldUpdate>
+            {() => (
+              <>
+                {/* <Button
+                  htmlType="reset"
+                  size="large"
+                  className="mr-2"
+                  disabled={form.getFieldValue('email').length === 0 || isSubmitted}
+                  onClick={() => {
+                    form.setFieldValue('email', '');
+                  }}
+                >
+                  Reset
+                </Button> */}
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  className="w-30"
+                  disabled={
+                    isSubmitted ||
+                    !form.isFieldsTouched(true) ||
+                    !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                  }
+                >
+                  {title}
+                  {isSubmitted && <Spin />}
+                </Button>
+              </>
+            )}
           </Form.Item>
         </Form>
         {!token && (
