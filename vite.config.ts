@@ -5,6 +5,15 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), visualizer({ open: false }), VitePWA({ registerType: 'autoUpdate' })],
+  plugins: [
+    react(),
+    visualizer({ open: false }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true,
+      },
+    }),
+  ],
   build: { chunkSizeWarningLimit: 625 },
 });
