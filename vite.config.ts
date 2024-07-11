@@ -9,9 +9,12 @@ export default defineConfig({
     react(),
     visualizer({ open: false }),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       devOptions: {
         enabled: true,
+      },
+      workbox: {
+        cleanupOutdatedCaches: true,
       },
     }),
   ],
