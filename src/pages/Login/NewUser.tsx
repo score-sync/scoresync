@@ -42,12 +42,28 @@ const NewUser = () => {
         </div>
         <Form
           name="invite"
-          initialValues={{ email: '' }}
+          initialValues={{ email: '', name: '' }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
           form={form}
         >
+          <Form.Item name="name" rules={[{ required: true, type: 'string', message: 'Please input email!' }]}>
+            <Input
+              prefix={<MailOutlined style={{ color: GREY }} />}
+              placeholder="Name"
+              size="large"
+              disabled={isSubmitted}
+            />
+          </Form.Item>
+          <Form.Item name="phone" rules={[{ required: true, type: 'number', message: 'Please input email!' }]}>
+            <Input
+              prefix={<MailOutlined style={{ color: GREY }} />}
+              placeholder="Phone"
+              size="large"
+              disabled={isSubmitted}
+            />
+          </Form.Item>
           <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input email!' }]}>
             <Input
               prefix={<MailOutlined style={{ color: GREY }} />}

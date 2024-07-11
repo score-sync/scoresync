@@ -53,7 +53,7 @@ const LoginPage = () => {
   const GOOGLE_APP_ID = '413722017629-jeqehdvvsjj03ooto842f5ju58sdupk8.apps.googleusercontent.com';
   return (
     <Flex justify="center" align="center" className="h-full">
-      <div className="w-1/4">
+      <div>
         <Image src={Logo} className={'cursor-pointer mt-4 mb-4 logo'} preview={false} />
 
         {/* <Title level={2} style={{ color: BLUE }}>
