@@ -8,6 +8,7 @@ import { AppRoutes } from '../../components/Router/types';
 import { useGetURLQueryParams } from '../../hooks/utils/use-get-url-query-param';
 import { notification } from 'antd';
 import { useState } from 'react';
+import { useNetworkCall } from '../../hooks/utils/use-network-call';
 
 const { Text, Title } = Typography;
 
@@ -16,10 +17,15 @@ const LoginPage = () => {
   const [isSubmitted, setSubmit] = useState(false);
   const navigate = useNavigate();
   const token = useGetURLQueryParams('token');
+  const authenticate = useNetworkCall();
+
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
     console.log(values['password']);
     await new Promise((r) => setTimeout(r, 5000));
+    const data = await authenticate('url', 'POST', { ...values, token });
+    console.log(data);
+
     notification.open({
       message: 'Password Set',
       description: `Try to sign in with new password.`,

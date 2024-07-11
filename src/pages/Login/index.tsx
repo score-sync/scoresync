@@ -18,6 +18,7 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 
 import { useCallback, useState } from 'react';
 import { User, UserLevel } from '../../types/User';
+import { useNetworkCall } from '../../hooks/utils/use-network-call';
 const { Text } = Typography;
 
 const LoginPage = () => {
@@ -26,6 +27,7 @@ const LoginPage = () => {
 
   const { setUser } = useData();
   const navigate = useNavigate();
+  const authenticate = useNetworkCall();
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
@@ -34,6 +36,8 @@ const LoginPage = () => {
     notification.open({
       message: 'Welcome User',
     });
+    const data = await authenticate('url', 'POST', values);
+    console.log(data);
     setUser({ name: 'Sameer', email: 'email', level: UserLevel.Admin });
     navigate(AppRoutes.LAGUE_HOME);
   };

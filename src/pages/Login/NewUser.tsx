@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
 import { notification } from 'antd';
 import { useState } from 'react';
+import { useNetworkCall } from '../../hooks/utils/use-network-call';
 
 const { Text, Title } = Typography;
 
@@ -13,10 +14,13 @@ const NewUser = () => {
   const [isSubmitted, setSubmit] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const authenticate = useNetworkCall();
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
     await new Promise((r) => setTimeout(r, 5000));
+    const data = await authenticate('url', 'POST', values);
+    console.log(data);
     notification.open({
       message: 'Invite Sent',
       description: `Invite sent successfully for ${values['email']}.`,
