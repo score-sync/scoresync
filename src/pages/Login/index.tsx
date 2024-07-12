@@ -18,7 +18,7 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 
 import { useCallback, useState } from 'react';
 import { User, UserLevel } from '../../types/User';
-import { useNetworkCall } from '../../hooks/utils/use-network-call';
+import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
 const { Text } = Typography;
 
 const LoginPage = () => {
@@ -32,12 +32,13 @@ const LoginPage = () => {
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
     console.log(values);
-    await new Promise((r) => setTimeout(r, 5000));
+    const roles = await authenticate('/roles', Method.GET, values);
+    console.log(roles);
+    const data = await authenticate('/login', Method.POST, values);
+    console.log(data);
     notification.open({
       message: 'Welcome User',
     });
-    const data = await authenticate('url', 'POST', values);
-    console.log(data);
     setUser({ name: 'Sameer', email: 'email', level: UserLevel.Admin });
     navigate(AppRoutes.LAGUE_HOME);
   };
@@ -66,7 +67,7 @@ const LoginPage = () => {
         <Form
           form={form}
           name="login"
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ email: '', password: '', remember: false }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >

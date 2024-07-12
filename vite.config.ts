@@ -19,4 +19,9 @@ export default defineConfig({
     }),
   ],
   build: { chunkSizeWarningLimit: 625 },
+  server: {
+    headers: {
+      'Content-Security-Policy': '',
+    },
+  },
 });

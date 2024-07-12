@@ -18,7 +18,6 @@ const NewUser = () => {
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    await new Promise((r) => setTimeout(r, 5000));
     const data = await authenticate('url', 'POST', values);
     console.log(data);
     notification.open({

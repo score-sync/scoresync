@@ -21,8 +21,6 @@ const LoginPage = () => {
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    console.log(values['password']);
-    await new Promise((r) => setTimeout(r, 5000));
     const data = await authenticate('url', 'POST', { ...values, token });
     console.log(data);
 
