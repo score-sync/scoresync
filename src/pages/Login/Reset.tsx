@@ -44,7 +44,7 @@ const LoginPage = () => {
 
   return (
     <Flex justify="center" align="center" className="h-full">
-      <div className="w-1/3">
+      <div className="md:w-1/2 lg:w-1/3">
         <Image src={Logo} className={'cursor-pointer mt-4 mb-2 logo'} preview={false} />
 
         <Title level={1} style={{ color: BLACK100 }}>

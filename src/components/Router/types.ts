@@ -33,6 +33,7 @@ export enum RoutePath {
 
 export enum AppRoutes {
   LOGIN = `/${RoutePath.LOGIN}`,
+  RESET_PASSWORD = `/${RoutePath.LOGIN}/${RoutePath.RESET}`,
   INVITATION = `/${RoutePath.LOGIN}/${RoutePath.INVITATION}`,
   LAGUE_HOME = `/${RoutePath.LEAGUE}`,
   CREATE_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.CREATE}`,

@@ -21,6 +21,14 @@ export const AppHeader = () => {
   const items: MenuProps['items'] = [
     {
       key: '2',
+      label: <Text className="p-6">Reset Password</Text>,
+      onClick: () => {
+        resetUser();
+        navigate(AppRoutes.RESET_PASSWORD);
+      },
+    },
+    {
+      key: '3',
       label: <Text className="p-6">Logout</Text>,
       onClick: () => {
         resetUser();
