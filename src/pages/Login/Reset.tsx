@@ -9,6 +9,8 @@ import { useGetURLQueryParams } from '../../hooks/utils/use-get-url-query-param'
 import { notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNetworkCall } from '../../hooks/utils/use-network-call';
+import { useData } from '../../DataProvider';
+import { User } from '../../types/User';
 
 const { Text, Title } = Typography;
 
@@ -18,15 +20,23 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const token = useGetURLQueryParams('token');
   const authenticate = useNetworkCall();
+  const { setUser } = useData();
 
   useEffect(() => {
     setSubmit(false);
-  }, []);
+    setUser({ token } as User);
+  }, [setUser, token]);
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    const data = await authenticate('/submit-reset-password', 'POST', { ...values, token });
-    console.log(data);
+    const data = await authenticate('/submit-reset-password', 'POST', {
+      newPassword: values['password'],
+      email: 'dummy',
+    });
+    if (!data) {
+      setSubmit(false);
+      return;
+    }
 
     notification.open({
       message: 'Password Set',

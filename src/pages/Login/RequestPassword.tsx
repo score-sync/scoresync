@@ -23,7 +23,7 @@ const RequestPassword = () => {
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    const data = await authenticate('/submit-reset-password', 'POST', { ...values });
+    const data = await authenticate('/request-reset-password', 'POST', { ...values });
     console.log(data);
     notification.open({
       message: 'Password Reset',

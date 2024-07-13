@@ -26,6 +26,7 @@ const NewUser = () => {
     const data = await authenticate('/onboard-user', 'POST', {
       ...values,
       reset_url: `${window.location.origin}/login/reset`,
+      username: 'dummy',
     });
     if (!data) {
       notification.open({
