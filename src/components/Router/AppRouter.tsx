@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { WrapComponent } from './WrapComponent';
 import { AppRoutes, RoutePath } from './types';
-import { LazyExoticComponent, ReactNode } from 'react';
+import { LazyExoticComponent, ReactNode, useEffect } from 'react';
 
 import { Suspense, lazy } from 'react';
 import { useValidateUser } from '../../hooks/use-validate-user';
@@ -45,6 +45,12 @@ const WithWrapper = (Component: LazyExoticComponent<() => ReactNode>) => {
 const NotFound = () => <div>404</div>;
 
 export const AppRouter = () => {
+  useEffect(() => {
+    const token = localStorage.getItem('scoreSync');
+    if (token) {
+      console.log(token);
+    }
+  }, []);
   return (
     <BrowserRouter>
       <Routes>

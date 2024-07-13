@@ -40,6 +40,7 @@ export const AppHeader = () => {
       key: '4',
       label: <Text className="p-6">Logout</Text>,
       onClick: () => {
+        localStorage.removeItem('scoreSync');
         logout('/logout', Method.POST);
         resetUser();
         navigate(AppRoutes.LOGIN);

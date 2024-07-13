@@ -48,9 +48,9 @@ const LoginPage = () => {
     }
     const { token } = validateCredentials;
     setUser({ token } as User);
-    console.log(token);
+    localStorage.setItem('scoreSync', token as string);
     const validateUser = (await authenticate('/verify-token', Method.POST, { token })) as {
-      user: { first_name: string; role_id: number; email: string };
+      user: { first_name: string; role: number; email: string };
     };
     if (!validateUser) {
       notification.open({
@@ -60,12 +60,12 @@ const LoginPage = () => {
       return;
     }
     const {
-      user: { first_name: name, email, role_id: role },
+      user: { first_name: name, email, role },
     } = validateUser;
     setUser({ name: name || 'Name', email, role, token });
     navigate(AppRoutes.LAGUE_HOME);
     notification.open({
-      message: `Welcome ${values.name}`,
+      message: `Welcome ${values.name || 'Name'}`,
     });
   };
 
