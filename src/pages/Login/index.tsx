@@ -31,8 +31,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setSubmit(false);
-    authenticate('/roles', 'GET').then(console.log);
-  }, [authenticate]);
+  }, []);
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
@@ -47,8 +46,10 @@ const LoginPage = () => {
       setSubmit(false);
       return;
     }
-    setUser({ token: validateCredentials.token } as User);
-    const validateUser = (await authenticate('/login', Method.POST, values)) as {
+    const { token } = validateCredentials;
+    setUser({ token } as User);
+    console.log(token);
+    const validateUser = (await authenticate('/verify-token', Method.POST, { token })) as {
       user: { first_name: string; role_id: number; email: string };
     };
     if (!validateUser) {
@@ -61,7 +62,7 @@ const LoginPage = () => {
     const {
       user: { first_name: name, email, role_id: role },
     } = validateUser;
-    setUser({ name, email, role, token: validateCredentials.token });
+    setUser({ name: name || 'Name', email, role, token });
     navigate(AppRoutes.LAGUE_HOME);
     notification.open({
       message: `Welcome ${values.name}`,
