@@ -29,11 +29,13 @@ export enum RoutePath {
   FIGHTER_HOME = '/fighter/:fighterId',
 
   INVITATION = 'invitation',
+  RESET_REQUEST = 'reset-request',
 }
 
 export enum AppRoutes {
   LOGIN = `/${RoutePath.LOGIN}`,
   RESET_PASSWORD = `/${RoutePath.LOGIN}/${RoutePath.RESET}`,
+  REQUEST_RESET_PASSWORD = `/${RoutePath.LOGIN}/${RoutePath.RESET_REQUEST}`,
   INVITATION = `/${RoutePath.LOGIN}/${RoutePath.INVITATION}`,
   LAGUE_HOME = `/${RoutePath.LEAGUE}`,
   CREATE_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.CREATE}`,

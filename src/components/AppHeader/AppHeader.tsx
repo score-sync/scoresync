@@ -31,6 +31,13 @@ export const AppHeader = () => {
     },
     {
       key: '3',
+      label: <Text className="p-6">Request Password Reset</Text>,
+      onClick: () => {
+        navigate(AppRoutes.REQUEST_RESET_PASSWORD);
+      },
+    },
+    {
+      key: '4',
       label: <Text className="p-6">Logout</Text>,
       onClick: () => {
         logout('/logout', Method.POST);
@@ -56,7 +63,7 @@ export const AppHeader = () => {
     // },
   ];
 
-  if (user?.level === UserLevel.Admin) {
+  if (user?.role === UserLevel.Admin) {
     items.unshift({
       key: '1',
       label: <Text className="p-6">Send Invite</Text>,

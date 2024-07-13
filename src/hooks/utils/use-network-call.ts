@@ -9,6 +9,8 @@ export enum Method {
   DELETE = 'DELETE',
 }
 
+export type StringMap = { [key in string]: unknown };
+
 export const useNetworkCall = () => {
   const {
     state: { user },
@@ -16,19 +18,27 @@ export const useNetworkCall = () => {
   return useCallback(
     async (url: string, method: string, data?: unknown) => {
       console.log(url, method, data);
-      const fetchParams: { [key in string]: unknown } = { method };
+      const fetchParams: StringMap = { method, mode: 'no-cors' };
       if (method !== Method.GET && data) {
         fetchParams['body'] = JSON.stringify(data);
       }
-      const headers = {
-        Authorization: `Bearer ${user?.token}`,
+      const headers: StringMap = {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
       };
+
+      if (user?.token) {
+        headers['Authorization'] = `Bearer ${user?.token}`;
+      }
+
       fetchParams['headers'] = headers;
       try {
         const response = await fetch(`${API_ENDPOINT}${url}`, fetchParams);
-        if (response.ok) {
-          return response.json();
-        }
+        console.log(response, response.ok);
+        // if (response.ok) {
+        const data = await response.json();
+        return data;
+        // }
       } catch (e) {
         console.log(e);
       }

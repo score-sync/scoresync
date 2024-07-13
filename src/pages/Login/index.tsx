@@ -31,24 +31,41 @@ const LoginPage = () => {
 
   useEffect(() => {
     setSubmit(false);
-  }, []);
+    authenticate('/roles', 'GET').then(console.log);
+  }, [authenticate]);
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    console.log(values);
-    const data = (await authenticate('/login', Method.POST, values)) as User;
-    if (!data) {
+    const validateCredentials = (await authenticate('/login', Method.POST, {
+      username: values['email'],
+      password: values['password'],
+    })) as User;
+    if (!validateCredentials) {
       notification.open({
         message: 'Failed to Login!',
       });
       setSubmit(false);
       return;
     }
+    setUser({ token: validateCredentials.token } as User);
+    const validateUser = (await authenticate('/login', Method.POST, values)) as {
+      user: { first_name: string; role_id: number; email: string };
+    };
+    if (!validateUser) {
+      notification.open({
+        message: 'Failed to Login!',
+      });
+      setSubmit(false);
+      return;
+    }
+    const {
+      user: { first_name: name, email, role_id: role },
+    } = validateUser;
+    setUser({ name, email, role, token: validateCredentials.token });
+    navigate(AppRoutes.LAGUE_HOME);
     notification.open({
       message: `Welcome ${values.name}`,
     });
-    setUser({ name: values.name, email: 'email', level: UserLevel.Admin, token: data.token });
-    navigate(AppRoutes.LAGUE_HOME);
   };
 
   const onFinishFailed = () => {
@@ -149,7 +166,7 @@ const LoginPage = () => {
               }) => {
                 const { name, email, profilePhoto } = data;
                 console.log(data);
-                setUser({ name, email, photo: profilePhoto, provider, level: UserLevel.Admin });
+                setUser({ name, email, photo: profilePhoto, provider, role: UserLevel.Admin });
                 navigate(AppRoutes.LAGUE_HOME);
               }}
               onReject={(err: string) => {

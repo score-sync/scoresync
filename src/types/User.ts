@@ -1,13 +1,13 @@
 export enum UserLevel {
-  Admin = 'admin',
-  LeagueOwner = 'owner',
-  Judge = 'judge',
+  Admin = 1,
+  LeagueOwner = 2,
+  Judge = 3,
 }
 export interface User {
   name: string;
   email: string;
   photo?: string;
   provider?: string;
-  level: UserLevel;
+  role: UserLevel;
   token?: string;
 }
