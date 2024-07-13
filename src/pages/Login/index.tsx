@@ -16,30 +16,38 @@ import { AppRoutes } from '../../components/Router/types';
 import { useData } from '../../DataProvider';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { User, UserLevel } from '../../types/User';
 import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
 const { Text } = Typography;
 
 const LoginPage = () => {
-  const [isSubmitted, setSubmit] = useState(false);
+  const [isSubmitted, setSubmit] = useState(true);
   const [form] = Form.useForm();
 
   const { setUser } = useData();
   const navigate = useNavigate();
   const authenticate = useNetworkCall();
 
+  useEffect(() => {
+    setSubmit(false);
+  }, []);
+
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
     console.log(values);
-    const roles = await authenticate('/roles', Method.GET, values);
-    console.log(roles);
-    const data = await authenticate('/login', Method.POST, values);
-    console.log(data);
+    const data = (await authenticate('/login', Method.POST, values)) as User;
+    if (!data) {
+      notification.open({
+        message: 'Failed to Login!',
+      });
+      setSubmit(false);
+      return;
+    }
     notification.open({
-      message: 'Welcome User',
+      message: `Welcome ${values.name}`,
     });
-    setUser({ name: 'Sameer', email: 'email', level: UserLevel.Admin });
+    setUser({ name: values.name, email: 'email', level: UserLevel.Admin, token: data.token });
     navigate(AppRoutes.LAGUE_HOME);
   };
 
@@ -71,7 +79,7 @@ const LoginPage = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Please input your email!' }]}>
+          <Form.Item name="email" rules={[{ required: true, type: 'string', message: 'Please input your email!' }]}>
             <Input
               prefix={<MailOutlined style={{ color: GREY }} />}
               placeholder="Email"

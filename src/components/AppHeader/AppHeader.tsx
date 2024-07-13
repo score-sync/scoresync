@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../Router/types';
 import { useData } from '../../DataProvider';
 import { UserLevel } from '../../types/User';
+import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
 
 const { Header } = Layout;
 // const { SubMenu } = Menu;
@@ -17,6 +18,7 @@ export const AppHeader = () => {
     state: { user },
     resetUser,
   } = useData();
+  const logout = useNetworkCall();
 
   const items: MenuProps['items'] = [
     {
@@ -31,6 +33,7 @@ export const AppHeader = () => {
       key: '3',
       label: <Text className="p-6">Logout</Text>,
       onClick: () => {
+        logout('/logout', Method.POST);
         resetUser();
         navigate(AppRoutes.LOGIN);
       },

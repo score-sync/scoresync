@@ -14,7 +14,7 @@ export const useNetworkCall = () => {
     state: { user },
   } = useData();
   return useCallback(
-    async (url: string, method: string, data: unknown) => {
+    async (url: string, method: string, data?: unknown) => {
       console.log(url, method, data);
       const fetchParams: { [key in string]: unknown } = { method };
       if (method !== Method.GET && data) {
