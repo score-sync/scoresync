@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useData } from '../../DataProvider';
-import { API_ENDPOINT } from '../../utilities/Constant';
+import { API_ENDPOINT, STORAGE_TOKEN } from '../../utilities/Constant';
 
 export enum Method {
   GET = 'GET',
@@ -26,8 +26,7 @@ export const useNetworkCall = () => {
         'Content-Type': 'application/json',
         // accept: 'application/json',
       };
-      const token = user?.token ?? (data && (data as { token: string })['token']);
-      console.log(token);
+      const token = user?.token ?? localStorage.getItem(STORAGE_TOKEN);
       if (token) {
         headers['Authorization'] = `Bearer ${token}`;
       }

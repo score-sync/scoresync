@@ -36,7 +36,7 @@ export enum AppRoutes {
   LOGIN = `/${RoutePath.LOGIN}`,
   RESET_PASSWORD = `/${RoutePath.LOGIN}/${RoutePath.RESET}`,
   REQUEST_RESET_PASSWORD = `/${RoutePath.LOGIN}/${RoutePath.RESET_REQUEST}`,
-  INVITATION = `/${RoutePath.LOGIN}/${RoutePath.INVITATION}`,
+  INVITATION = `/${RoutePath.LEAGUE}/${RoutePath.INVITATION}`,
   LAGUE_HOME = `/${RoutePath.LEAGUE}`,
   CREATE_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.CREATE}`,
   UPCOMING_LEAGUE = `/${RoutePath.LEAGUE}/${RoutePath.UPCOMING}`,

@@ -7,6 +7,7 @@ import { AppRoutes } from '../Router/types';
 import { useData } from '../../DataProvider';
 import { UserLevel } from '../../types/User';
 import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
+import { STORAGE_TOKEN } from '../../utilities/Constant';
 
 const { Header } = Layout;
 // const { SubMenu } = Menu;
@@ -40,10 +41,12 @@ export const AppHeader = () => {
       key: '4',
       label: <Text className="p-6">Logout</Text>,
       onClick: () => {
-        localStorage.removeItem('scoreSync');
-        logout('/logout', Method.POST);
-        resetUser();
-        navigate(AppRoutes.LOGIN);
+        localStorage.removeItem(STORAGE_TOKEN);
+        (async () => {
+          await logout('/logout', Method.POST);
+          resetUser();
+          navigate(AppRoutes.LOGIN);
+        })();
       },
     },
     {
