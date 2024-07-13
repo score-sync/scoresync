@@ -46,6 +46,13 @@ export const AppHeader = () => {
         navigate(AppRoutes.LOGIN);
       },
     },
+    {
+      key: '5',
+      label: <Text className="p-6">Login again</Text>,
+      onClick: () => {
+        navigate(AppRoutes.LOGIN);
+      },
+    },
     // {
     //   key: '3',
     //   label: (

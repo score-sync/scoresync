@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
 import { notification } from 'antd';
 import { useEffect, useState } from 'react';
-import { useNetworkCall } from '../../hooks/utils/use-network-call';
+import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
 
 const { Text, Title } = Typography;
 
@@ -23,7 +23,7 @@ const RequestPassword = () => {
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    const data = await authenticate('/request-reset-password', 'POST', { ...values });
+    const data = await authenticate('/request-reset-password', Method.POST, { ...values });
     if (!data) {
       setSubmit(false);
       return;

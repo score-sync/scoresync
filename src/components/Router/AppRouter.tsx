@@ -1,12 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { WrapComponent } from './WrapComponent';
 import { AppRoutes, RoutePath } from './types';
-import { LazyExoticComponent, ReactNode, useEffect, useState } from 'react';
+import { LazyExoticComponent, ReactNode } from 'react';
 
 import { Suspense, lazy } from 'react';
 import { useValidateUser } from '../../hooks/utils/use-validate-user';
-import { Spin } from 'antd/lib';
-import { LoadingOutlined } from '@ant-design/icons/lib/icons';
 
 const CreateLanding = lazy(() => import('../../pages/Leage/CreateLanding'));
 const LoginPage = lazy(() => import('../../pages/Login'));
@@ -47,17 +45,17 @@ const WithWrapper = (Component: LazyExoticComponent<() => ReactNode>) => {
 const NotFound = () => <div>404</div>;
 
 export const AppRouter = () => {
-  const [validate, setValidate] = useState(false);
-  const validateUser = useValidateUser();
+  // const [validate, setValidate] = useState(false);
+  // const validateUser = useValidateUser();
 
-  useEffect(() => {
-    (async () => {
-      await validateUser();
-      setValidate(true);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     await validateUser();
+  //     setValidate(true);
+  //   })();
+  // }, []);
 
-  if (!validate) return <Spin indicator={<LoadingOutlined spin />} size="large" />;
+  // if (!validate) return <Spin indicator={<LoadingOutlined spin />} size="large" />;
 
   return (
     <BrowserRouter>

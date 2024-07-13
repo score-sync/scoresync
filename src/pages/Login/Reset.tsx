@@ -8,7 +8,7 @@ import { AppRoutes } from '../../components/Router/types';
 import { useGetURLQueryParams } from '../../hooks/utils/use-get-url-query-param';
 import { notification } from 'antd';
 import { useEffect, useState } from 'react';
-import { useNetworkCall } from '../../hooks/utils/use-network-call';
+import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
 import { useData } from '../../DataProvider';
 import { User } from '../../types/User';
 
@@ -29,7 +29,7 @@ const LoginPage = () => {
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    const data = await authenticate('/submit-reset-password', 'POST', {
+    const data = await authenticate('/submit-reset-password', Method.POST, {
       newPassword: values['password'],
       email,
     });

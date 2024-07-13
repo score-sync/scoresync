@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
 import { notification } from 'antd';
 import { useEffect, useState } from 'react';
-import { useNetworkCall } from '../../hooks/utils/use-network-call';
+import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
 import Select from 'antd/lib/select';
 
 const { Text, Title } = Typography;
@@ -23,7 +23,7 @@ const NewUser = () => {
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
-    const data = await authenticate('/onboard-user', 'POST', {
+    const data = await authenticate('/onboard-user', Method.POST, {
       ...values,
       reset_url: `${window.location.origin}/login/reset`,
       username: 'dummy',
