@@ -18,26 +18,25 @@ const LoginPage = () => {
   const [form] = Form.useForm();
   const [isSubmitted, setSubmit] = useState(true);
   const navigate = useNavigate();
-  const token = useGetURLQueryParams('token');
+  const { token, email } = useGetURLQueryParams() as { token: string; email: string };
   const authenticate = useNetworkCall();
   const { setUser } = useData();
 
   useEffect(() => {
     setSubmit(false);
-    setUser({ token } as User);
-  }, [setUser, token]);
+    setUser({ token, email } as User);
+  }, [email, setUser, token]);
 
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
     const data = await authenticate('/submit-reset-password', 'POST', {
       newPassword: values['password'],
-      email: 'dummy',
+      email,
     });
     if (!data) {
       setSubmit(false);
       return;
     }
-
     notification.open({
       message: 'Password Set',
       description: `Try to sign in with new password.`,
@@ -52,7 +51,7 @@ const LoginPage = () => {
     });
   };
 
-  const title = token ? 'Set Password' : 'Reset Password';
+  const title = 'Reset Password';
 
   return (
     <Flex justify="center" align="center" className="h-full">
@@ -169,11 +168,6 @@ const LoginPage = () => {
             )}
           </Form.Item>
         </Form>
-        {!token && (
-          <Text>
-            Know your password <a href="../login">Log In</a>
-          </Text>
-        )}
       </div>
     </Flex>
   );

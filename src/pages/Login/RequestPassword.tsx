@@ -24,10 +24,14 @@ const RequestPassword = () => {
   const onFinish = async (values: { [key in string]: string }) => {
     setSubmit(true);
     const data = await authenticate('/request-reset-password', 'POST', { ...values });
-    console.log(data);
+    if (!data) {
+      setSubmit(false);
+      return;
+    }
+
     notification.open({
       message: 'Password Reset',
-      description: `Looks for password reset link.`,
+      description: `Look for password reset link in your inbox.`,
     });
     navigate(AppRoutes.LOGIN);
   };

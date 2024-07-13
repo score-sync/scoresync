@@ -11,7 +11,7 @@ import { BLACK100, GREY } from '../../utilities/Constant';
 //   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 // });
 import Logo from '../../assets/images/logo.png';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../components/Router/types';
 import { useData } from '../../DataProvider';
 import { LoginSocialGoogle } from 'reactjs-social-login';
@@ -19,15 +19,20 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 import { useCallback, useEffect, useState } from 'react';
 import { User, UserLevel } from '../../types/User';
 import { Method, useNetworkCall } from '../../hooks/utils/use-network-call';
+import { useValidateUser } from '../../hooks/utils/use-validate-user';
 const { Text } = Typography;
 
 const LoginPage = () => {
   const [isSubmitted, setSubmit] = useState(true);
   const [form] = Form.useForm();
 
-  const { setUser } = useData();
+  const {
+    setUser,
+    state: { user },
+  } = useData();
   const navigate = useNavigate();
   const authenticate = useNetworkCall();
+  const validateUser = useValidateUser();
 
   useEffect(() => {
     setSubmit(false);
@@ -49,20 +54,7 @@ const LoginPage = () => {
     const { token } = validateCredentials;
     setUser({ token } as User);
     localStorage.setItem('scoreSync', token as string);
-    const validateUser = (await authenticate('/verify-token', Method.POST, { token })) as {
-      user: { first_name: string; role: number; email: string };
-    };
-    if (!validateUser) {
-      notification.open({
-        message: 'Failed to Login!',
-      });
-      setSubmit(false);
-      return;
-    }
-    const {
-      user: { first_name: name, email, role },
-    } = validateUser;
-    setUser({ name: name || 'Name', email, role, token });
+    await validateUser();
     navigate(AppRoutes.LAGUE_HOME);
     notification.open({
       message: `Welcome ${values.name || 'Name'}`,
@@ -79,6 +71,10 @@ const LoginPage = () => {
   const onLoginStart = useCallback(() => {
     // alert('login start');
   }, []);
+
+  if (user && user.role) {
+    return <Navigate to={AppRoutes.LAGUE_HOME} />;
+  }
 
   const REDIRECT_URI = 'http://localhost:5173/signin';
   const GOOGLE_APP_ID = '413722017629-jeqehdvvsjj03ooto842f5ju58sdupk8.apps.googleusercontent.com';
