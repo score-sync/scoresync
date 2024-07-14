@@ -5,7 +5,6 @@ import { LazyExoticComponent, ReactNode } from 'react';
 
 import { Suspense, lazy } from 'react';
 import { useData } from '../../DataProvider';
-import { STORAGE_REDIRECT_URL } from '../../utilities/Constant';
 
 const CreateLanding = lazy(() => import('../../pages/Leage/CreateLanding'));
 const LoginPage = lazy(() => import('../../pages/Login'));
@@ -33,10 +32,6 @@ const WithWrapper = (Component: LazyExoticComponent<() => ReactNode>) => {
   } = useData();
 
   if (!user) {
-    if (!localStorage.getItem(STORAGE_REDIRECT_URL)) {
-      console.log('here', window.location.href);
-      localStorage.setItem(STORAGE_REDIRECT_URL, window.location.href);
-    }
     return <Navigate to={AppRoutes.LOGIN} />;
   }
 

@@ -28,7 +28,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     formDisable(false);
-    console.log('useEffect', localStorage.getItem(STORAGE_TOKEN));
     if (localStorage.getItem(STORAGE_TOKEN)) {
       validateUser();
     }
@@ -68,7 +67,7 @@ const LoginPage = () => {
   //   // alert('login start');
   // }, []);
 
-  console.log(redirectURL, localStorage.getItem(STORAGE_TOKEN), user);
+  console.log(redirectURL, user);
 
   // Session found not validated
   if (localStorage.getItem(STORAGE_TOKEN) && !user) {
@@ -80,7 +79,6 @@ const LoginPage = () => {
   }
 
   if (user?.role && redirectURL && redirectURL != '') {
-    localStorage.removeItem(STORAGE_REDIRECT_URL);
     const url = new URL(redirectURL);
     return <Navigate to={`${url.pathname}${url.search}`} />;
   }

@@ -14,6 +14,9 @@ export const useValidateUser = () => {
         user: { first_name: string; role: number; email: string };
       };
       if (!validateUser) {
+        console.warn('Invalid token');
+        localStorage.removeItem(STORAGE_TOKEN);
+        window.location.reload();
         return;
       }
       const {
