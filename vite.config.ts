@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
         workbox: {
           cleanupOutdatedCaches: true,
         },
+        manifest: { theme_color: '#fff' },
       }),
       mockDevServerPlugin(),
     ],

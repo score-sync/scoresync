@@ -72,7 +72,7 @@ const RequestPassword = () => {
           >
             <Input
               prefix={<MailOutlined style={{ color: GREY }} />}
-              placeholder="Confirm new password"
+              placeholder="Email"
               size="large"
               disabled={isSubmitted}
             />
