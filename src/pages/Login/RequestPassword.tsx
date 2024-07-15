@@ -31,6 +31,7 @@ const RequestPassword = () => {
 
     notification.open({
       message: 'Password Reset',
+      type: 'error',
       description: `Look for password reset link in your inbox.`,
     });
     navigate(AppRoutes.LOGIN);

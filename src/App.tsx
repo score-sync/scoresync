@@ -13,8 +13,8 @@ const { Content } = Layout;
 function App() {
   useEffect(() => {
     const redirectURL = window.location.href;
-    console.log(redirectURL);
     if (!window.location.pathname.includes(AppRoutes.LOGIN)) {
+      console.log(redirectURL, AppRoutes.LOGIN);
       localStorage.setItem(STORAGE_REDIRECT_URL, redirectURL);
     }
   }, []);

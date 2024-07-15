@@ -31,6 +31,7 @@ const NewUser = () => {
     if (!data) {
       notification.open({
         message: 'Failed try again!',
+        type: 'error',
       });
       setSubmit(false);
       return;
