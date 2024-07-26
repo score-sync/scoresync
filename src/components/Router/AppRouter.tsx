@@ -14,7 +14,6 @@ const NewUser = lazy(() => import('../../pages/Login/NewUser'));
 
 const App = lazy(() => import('../AddPanel/Test'));
 const CreateLague = lazy(() => import('../../pages/Leage/CreateLague'));
-const CreateLagueParts = lazy(() => import('../../pages/Leage/CreateLeagueParts'));
 
 const AddFighter = lazy(() => import('../../pages/Fighter/AddFighter'));
 const Fighter = lazy(() => import('../../pages/Fighter/Fighter'));
@@ -80,7 +79,7 @@ export const AppRouter = () => {
             <Route index element={WithWrapper(LeagueHome)} />
             <Route path={RoutePath.INVITATION} element={WithWrapper(NewUser)} />
             <Route path={RoutePath.LEAGUE_ID}>
-              <Route index element={WithWrapper(CreateLagueParts)} />
+              <Route index element={WithWrapper(CreateLague)} />
               {/* Add fighters inside league */}
               <Route path={RoutePath.FIGHTER}>
                 <Route index element={WithWrapper(AddFighter)} />

@@ -36,5 +36,17 @@ export default defineMock(
         },
       ],
     },
+    {
+      url: '/leagues/create',
+      body: {
+        id: '1',
+        key: '1',
+        name: 'Mike',
+        date: 'Date',
+        pramoterName: 'Mike',
+        location: '10 Downing Street',
+        edit: 1,
+      },
+    },
   ]),
 );

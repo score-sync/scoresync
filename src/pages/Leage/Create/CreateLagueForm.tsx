@@ -1,10 +1,12 @@
-import { Input, Button, Upload, DatePicker, Form, InputNumber, Space, Flex, Select } from 'antd';
+import { Input, Button, Upload, DatePicker, Form, InputNumber, Space, Flex, Select, Spin } from 'antd';
 // import { PageHeader } from '@ant-design/pro-layout';
 import { notification } from 'antd';
 import { MinusOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { useCallback, useState } from 'react';
 import { Method, useNetworkCall } from '../../../hooks/utils/use-network-call';
 import { League } from '../../../types/League';
+import { AddMultipleUsers } from './AddMultipleUsers';
+import { useNavigate } from 'react-router-dom';
 // import { BLUE } from '../../../utilities/Constant';
 
 // const defaultValues = {
@@ -19,13 +21,11 @@ export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
   const [form] = Form.useForm();
   const [disableForm, formDisable] = useState(false);
   const create = useNetworkCall();
+  const navigate = useNavigate();
 
   const onFinish = async (values: { [key in string]: string }) => {
     formDisable(true);
-    const league = (await create('/login', Method.POST, {
-      username: values['email'],
-      password: values['password'],
-    })) as League;
+    const league = (await create('/leagues/create', Method.POST, values)) as League;
     if (!league) {
       notification.open({
         message: 'Failed to create league!',
@@ -33,6 +33,8 @@ export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
       formDisable(false);
       return;
     }
+    console.log(onDone);
+    navigate(`/league/${league.id}`);
   };
 
   const increment = useCallback(
@@ -131,11 +133,9 @@ export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
               type="primary"
               htmlType="submit"
               size="large"
-              onClick={() => {
-                onDone();
-              }}
+              disabled={disableForm || !!form.getFieldsError().filter(({ errors }) => errors.length).length}
             >
-              Save
+              Save {disableForm && <Spin />}
             </Button>
             {/* <Button
               size="large"
@@ -147,6 +147,8 @@ export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
             </Button> */}
           </Flex>
         </Form>
+        <AddMultipleUsers title="Add Players" leagueId={1} type="users"></AddMultipleUsers>
+        <AddMultipleUsers title="Add Refrees" leagueId={1} type="refrees"></AddMultipleUsers>
       </div>
     </div>
   );
