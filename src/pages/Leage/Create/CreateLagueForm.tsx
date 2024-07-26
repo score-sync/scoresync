@@ -1,8 +1,10 @@
-import { Input, Button, Upload, DatePicker, Form, InputNumber, Space, Flex } from 'antd';
+import { Input, Button, Upload, DatePicker, Form, InputNumber, Space, Flex, Select } from 'antd';
 // import { PageHeader } from '@ant-design/pro-layout';
-
+import { notification } from 'antd';
 import { MinusOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { Method, useNetworkCall } from '../../../hooks/utils/use-network-call';
+import { League } from '../../../types/League';
 // import { BLUE } from '../../../utilities/Constant';
 
 // const defaultValues = {
@@ -13,8 +15,26 @@ import { useCallback } from 'react';
 //   amateurK1Bouts: 0,
 // };
 
-export const CreateLagueForm = ({ onDone }: { onDone: () => void }) => {
+export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
   const [form] = Form.useForm();
+  const [disableForm, formDisable] = useState(false);
+  const create = useNetworkCall();
+
+  const onFinish = async (values: { [key in string]: string }) => {
+    formDisable(true);
+    const league = (await create('/login', Method.POST, {
+      username: values['email'],
+      password: values['password'],
+    })) as League;
+    if (!league) {
+      notification.open({
+        message: 'Failed to create league!',
+      });
+      formDisable(false);
+      return;
+    }
+  };
+
   const increment = useCallback(
     (field: string) => {
       const currentValue = form.getFieldValue(field) ?? 0;
@@ -33,10 +53,17 @@ export const CreateLagueForm = ({ onDone }: { onDone: () => void }) => {
   return (
     <div className="flex flex-col items-center justify-center mt-8">
       <div className="rounded-lg w-full">
-        <Form form={form} layout="vertical" name="form-name" initialValues={{}} onFinish={() => {}}>
+        <Form form={form} layout="vertical" name="form-name" initialValues={{ type: '1' }} onFinish={onFinish}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
             <Form.Item name="leagueName" label="League Name" className="md:mr-16">
-              <Input size="large" className="border-blue" placeholder="Name" />
+              <Input size="large" className="border-blue" placeholder="Name" readOnly disabled={disableForm} />
+            </Form.Item>
+            <Form.Item name="type" label="Type" className="md:mr-16">
+              <Select onChange={() => {}} size="large" disabled>
+                <Select.Option value="1" selected>
+                  MMA
+                </Select.Option>
+              </Select>
             </Form.Item>
             <Form.Item name="leagueDateTime" label="League Date & Time">
               <DatePicker showTime size="large" className="border-blue" placeholder="Date & Time" />
@@ -47,6 +74,7 @@ export const CreateLagueForm = ({ onDone }: { onDone: () => void }) => {
             <Form.Item name="promoterName" label="Promoter Name" className="md:mr-16">
               <Input size="large" className="border-blue" placeholder="Name" />
             </Form.Item>
+            <div></div>
             <Space>
               <Button icon={<MinusOutlined />} onClick={() => decrement('amateurMMABouts')} />
               <Form.Item name="amateurMMABouts" label="No. of Amateur MMA Bouts" initialValue={0}>

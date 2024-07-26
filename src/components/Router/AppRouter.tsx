@@ -6,16 +6,14 @@ import { LazyExoticComponent, ReactNode } from 'react';
 import { Suspense, lazy } from 'react';
 import { useData } from '../../DataProvider';
 
-const CreateLanding = lazy(() => import('../../pages/Leage/CreateLanding'));
+const LeagueHome = lazy(() => import('../../pages/Leage/LeagueHome'));
 const LoginPage = lazy(() => import('../../pages/Login'));
 const LoginResetPage = lazy(() => import('../../pages/Login/Reset'));
 const RequestPassword = lazy(() => import('../../pages/Login/RequestPassword'));
 const NewUser = lazy(() => import('../../pages/Login/NewUser'));
 
 const App = lazy(() => import('../AddPanel/Test'));
-const PastLeague = lazy(() => import('../../pages/Leage/PastLeague'));
 const CreateLague = lazy(() => import('../../pages/Leage/CreateLague'));
-const UpcomingLeague = lazy(() => import('../../pages/Leage/UpcomingLeague'));
 const CreateLagueParts = lazy(() => import('../../pages/Leage/CreateLeagueParts'));
 
 const AddFighter = lazy(() => import('../../pages/Fighter/AddFighter'));
@@ -79,7 +77,7 @@ export const AppRouter = () => {
             />
           </Route>
           <Route path={RoutePath.LEAGUE}>
-            <Route index element={WithWrapper(CreateLanding)} />
+            <Route index element={WithWrapper(LeagueHome)} />
             <Route path={RoutePath.INVITATION} element={WithWrapper(NewUser)} />
             <Route path={RoutePath.LEAGUE_ID}>
               <Route index element={WithWrapper(CreateLagueParts)} />
@@ -102,8 +100,6 @@ export const AppRouter = () => {
               </Route>
             </Route>
             <Route path={RoutePath.CREATE} element={WithWrapper(CreateLague)} />
-            <Route path={RoutePath.UPCOMING} element={WithWrapper(UpcomingLeague)} />
-            <Route path={RoutePath.PAST} element={WithWrapper(PastLeague)} />
           </Route>
 
           <Route path={RoutePath.FIGHTER}>

@@ -1,6 +1,6 @@
 import { defineMock } from 'vite-plugin-mock-dev-server';
 
-const formatMock = (list) => {
+export const formatMock = (list) => {
   return list.map(({ url, body }) => ({ body, url: '/mock' + url }));
 };
 

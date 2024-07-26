@@ -57,7 +57,7 @@ const NewUser = () => {
           New User Invitation
         </Title>
         <div className="pb-4">
-          <Text>Enter new league owners email,</Text>
+          <Text>Enter user details,</Text>
         </div>
         <Form
           name="invite"

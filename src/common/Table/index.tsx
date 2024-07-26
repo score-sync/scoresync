@@ -1,25 +1,6 @@
-import { PageHeader } from '@ant-design/pro-layout';
 import { Popconfirm, Table } from 'antd';
 import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
-
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    date: 'Date',
-    pramoterName: 'Mike',
-    location: '10 Downing Street',
-    edit: 1,
-  },
-  {
-    key: '2',
-    date: 'Date',
-    name: 'John',
-    pramoterName: 32,
-    location: '10 Downing Street',
-    edit: 2,
-  },
-];
+import { League } from '../../types/League';
 
 const columns = [
   {
@@ -77,15 +58,19 @@ const columns = [
 ];
 
 export const LeagueTable = ({
-  title,
+  data: dataSource,
   rowSelect,
+  type,
 }: {
-  title: string;
+  type: string;
   rowSelect?: (record: unknown, rowIndex?: number) => void;
+  data: League[];
 }) => {
+  const columnsFiltered = type === 'past' ? columns.filter(({ key }) => key !== 'delete' && key !== 'edit') : columns;
+
   return (
     <>
-      <PageHeader className="border-0 mb-16 mt-10 pl-0 border-b border-grey" title={title} subTitle="" />
+      {/* <PageHeader className="border-0 mb-16 mt-10 pl-0 border-b border-grey" title={title} subTitle="" /> */}
       <Table
         onRow={(record, rowIndex) => {
           if (!rowSelect) {
@@ -96,7 +81,7 @@ export const LeagueTable = ({
           };
         }}
         dataSource={dataSource}
-        columns={columns}
+        columns={columnsFiltered}
       />
     </>
   );
