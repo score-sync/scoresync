@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 import { Method, useNetworkCall } from '../../../hooks/utils/use-network-call';
 import { League } from '../../../types/League';
 import { AddMultipleUsers } from './AddMultipleUsers';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import { BLUE } from '../../../utilities/Constant';
 
 // const defaultValues = {
@@ -22,6 +22,7 @@ export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
   const [disableForm, formDisable] = useState(false);
   const create = useNetworkCall();
   const navigate = useNavigate();
+  const { leagueId } = useParams();
 
   const onFinish = async (values: { [key in string]: string }) => {
     formDisable(true);
@@ -147,8 +148,8 @@ export const CreateLeagueForm = ({ onDone }: { onDone: () => void }) => {
             </Button> */}
           </Flex>
         </Form>
-        <AddMultipleUsers title="Add Players" leagueId={1} type="users"></AddMultipleUsers>
-        <AddMultipleUsers title="Add Refrees" leagueId={1} type="refrees"></AddMultipleUsers>
+        {leagueId && <AddMultipleUsers title="Add Players" leagueId={1} type="users"></AddMultipleUsers>}
+        {leagueId && <AddMultipleUsers title="Add Refrees" leagueId={1} type="refrees"></AddMultipleUsers>}
       </div>
     </div>
   );

@@ -42,6 +42,7 @@ const LoginPage = () => {
     if (!validateCredentials) {
       notification.open({
         message: 'Failed to Login!',
+        type: 'error',
       });
       formDisable(false);
       return;

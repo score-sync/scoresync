@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import { SearchOutlined } from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import type { InputRef, TableColumnsType, TableColumnType } from 'antd';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Flex, Input, Space, Table } from 'antd';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 import Highlighter from 'react-highlight-words';
 import { TableRowSelection } from 'antd/lib/table/interface';
@@ -203,7 +203,14 @@ export const AddMultipleUsers = ({ leagueId, type, title }: { leagueId: number; 
 
   return (
     <div className="py-4">
-      {title && <Title level={5}>{title}</Title>}
+      {title && (
+        <Flex justify="space-between">
+          <Title level={5}>{title}</Title>
+          <Button type="primary" icon={<PlusOutlined />} size="large">
+            {title}
+          </Button>
+        </Flex>
+      )}
       <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
     </div>
   );
